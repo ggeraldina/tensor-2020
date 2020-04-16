@@ -8,4 +8,3 @@ This app for Tensor
 ### Заметки по разработке
 
 [Тык сюда :)](/NOTES.md)
-
