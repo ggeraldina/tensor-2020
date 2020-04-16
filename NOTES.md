@@ -6,7 +6,9 @@
 
 #  Heroku
 
-https://tensor-2020.herokuapp.com/
+https://tensor-2020.herokuapp.com/ - боевой сайт (master)
+
+https://tensor-2020-test.herokuapp.com/ - тестовая версия (develop)
 
 # Flask
 
@@ -54,7 +56,7 @@ https://flask.palletsprojects.com/en/1.1.x/
 
 ## VS Code
 
-Для VS Code pylint, запуск с отладкой/без по нажатию одной кнопочки уже настроены. Загляните в папку `.vccode`. Можно забыть о предыдущих двух пунктах :Р.
+Для VS Code pylint, запуск с отладкой/без по нажатию одной кнопочки уже настроены. Загляните в папку `.vscode`. Можно забыть о предыдущих двух пунктах :Р.
 
 ## Переменные среды
 
