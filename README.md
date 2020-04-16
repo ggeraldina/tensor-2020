@@ -1,3 +1,10 @@
 # tensor-2020
-for Tensor
 
+This app for Tensor
+
+---
+---
+
+### Заметки по разработке
+
+[Тык сюда :)](/NOTES.md)
