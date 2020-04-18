@@ -19,7 +19,7 @@
         photo: string - ссылка на фото url
         start_time: datetime - день и время начала мероприятия
         end_time: datetime - день и время окончания мероприятия
-        discription: string - описание мероприятия, аннотация; текст (не html)
+        description: string - описание мероприятия, аннотация; текст (не html)
         director: string - режиссеры; список текстом
         actors: string - актеры; список текстом
 
@@ -81,7 +81,7 @@
 
 2. Страница мероприятия
 
-**/api/v1/event?_id=**
+**/api/v1/get_event?id=**
 
     frontend -> backend
     переход к подробному описанию
@@ -95,7 +95,7 @@
             photo: string - ссылка на фото url
             start_time: datetime - день и время начала мероприятия
             end_time: datetime - день и время окончания мероприятия
-            discription: string - описание мероприятия, аннотация; текст (не html)
+            description: string - описание мероприятия, аннотация; текст (не html)
             director: string - режиссеры; список текстом
             actors: string - актеры; список текстом
         }
@@ -113,21 +113,18 @@
 
 3. Бронирование
 
-**/api/v1/booking?booking=**
+**/api/v1/get_booking?phone_number=&password_to_cancel=&event=&tickets=**
 
     frontend -> backend
     бронирование
-        booking: 
-        {
-            phone_number: integer - номер телефона
-            password_to_cancel: string - пароль для отмены брони
-            event: ObjectId event - id мероприятия
-            tickets: [
-                { 
-                    _id: ObjectId ticket - id билета
-                }, ...
-            ]
-        }
+        phone_number: integer - номер телефона
+        password_to_cancel: string - пароль для отмены брони
+        event: ObjectId event - id мероприятия
+        tickets: [
+            { 
+                _id: ObjectId ticket - id билета
+            }, ...
+        ]
     frontend <- backend
     успешное бронирование
         _id: integer - id брони
