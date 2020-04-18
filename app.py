@@ -1,4 +1,5 @@
-"""Entry point for the application."""
-from application import APP
+""" Точка входа в приложение """
+from server import APP
 
-APP.run()
+if __name__ == "__main__":
+    APP.run()
