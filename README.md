@@ -8,8 +8,8 @@
 ---
 ### Описание структуры сайта
 
-[Тык сюда :)](/discription/DISCRIPTION_APP.md)
+[Тык сюда :)](/description/DESCRIPTION_APP.md)
 
 ### Заметки по разработке
 
-[Тык сюда :)](/discription/NOTES.md)
+[Тык сюда :)](/description/NOTES.md)
