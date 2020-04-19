@@ -1,1 +1,30 @@
 
+[
+  {
+      "_id": {
+          "$oid": "5e6cb93b942b27e8f4f027c1"
+      },
+      "row": 1,
+      "seat": 1,
+      "event": {
+          "$oid": "5e6cb93b942b27e8f4f027a1"
+      },
+      "price": 800,
+      "color_zone": "#9497ff"
+      "is_booked": "false"
+    },
+    {
+      "_id": {
+          "$oid": "5e6cb93b942b27e8f4f027c2"
+      },
+      "row": 1,
+      "seat": 2,
+      "event": {
+          "$oid": "5e6cb93b942b27e8f4f027a1"
+      },
+      "price": 800,
+      "color_zone": "#9497ff"
+      "is_booked": "false"
+  }
+]
+
