@@ -16,6 +16,7 @@
     events:
         _id: ObjectId
         title: string - название мероприятия
+        author: string - автор
         photo: string - ссылка на фото url
         start_time: datetime - день и время начала мероприятия
         end_time: datetime - день и время окончания мероприятия
@@ -159,11 +160,12 @@
             }, ...
         ]
 
-**/api/v1/canсel_booking?_id=&password_to_cancel=**
+**/api/v1/canсel_booking?id=&phone_number=&password_to_cancel=**
 
     frontend -> backend
     отмена брони
         _id: integer - номер брони 1, 2, 3
+        phone_number: integer - номер телефона
         password_to_cancel: string - пароль для отмены брони
     frontend <- backend
     успешное удаление брони
