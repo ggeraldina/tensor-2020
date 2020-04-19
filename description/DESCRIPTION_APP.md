@@ -61,7 +61,7 @@
 
 1. Главная страница
 
-**/api/v1/list_events?offset=&limit=**
+**/api/v1/get_list_events?offset=&limit=**
 
     frontend -> backend
     подгрузка
@@ -113,7 +113,7 @@
 
 3. Бронирование
 
-**/api/v1/get_booking?phone_number=&password_to_cancel=&event=&tickets=**
+**/api/v1/add_booking?phone_number=&password_to_cancel=&event=&tickets=**
 
     frontend -> backend
     бронирование
@@ -132,7 +132,7 @@
 
 4. Просмотр действующих броней
 
-**/api/v1/list_bookings?phone_number=**
+**/api/v1/get_list_bookings?phone_number=**
 
     frontend -> backend
     просмотр броней
