@@ -1,0 +1,104 @@
+[
+  {
+    "_id": {
+          "$oid": "000001"
+    },
+    "password_to_cancel":"pbkdf2:sha256:150000$jHuG39KN$013958f3fbe87259e98dcadba0ee33d16ec9c0847444ac447f0173de4fc2dd0a",
+    "phone_number":"89991234567",
+    "event":"5e6cb93b942b27e8f4f027a1",
+    "tickets": [
+        {
+          "_id": {
+              "$oid": "5e6cb93b942b27e8f4f027c1"
+          },
+          "row": 1,
+          "seat": 1,
+          "event": {
+              "$oid": "5e6cb93b942b27e8f4f027a1"
+          },
+          "price": 800,
+          "color_zone": "#9497ff"
+        },
+        {
+          "_id": {
+              "$oid": "5e6cb93b942b27e8f4f027c2"
+          },
+          "row": 1,
+          "seat": 2,
+          "event": {
+              "$oid": "5e6cb93b942b27e8f4f027a1"
+          },
+          "price": 800,
+          "color_zone": "#9497ff"
+        }
+    ]
+  },
+  {
+    "_id": {
+          "$oid": "000003"
+    },
+    "password_to_cancel":"pbkdf2:sha256:150000$jHuG39KM$013958f3fbe87259e98dcadba0ee33d16er9c0847444ac447f0173de4fc2dd8a",
+    "phone_number":"89906457812",
+    "event":"5e6cb93b942b27e8f4f027a2",
+    "tickets": [
+        {
+          "_id": {
+              "$oid": "5e6cb93b942b27e8f4f027e1"
+          },
+          "row": 7,
+          "seat": 10,
+          "event": {
+              "$oid": "5e6cb93b942b27e8f4f027a2"
+          },
+          "price": 1500,
+          "color_zone": "#f0fc62"
+        },
+        {
+          "_id": {
+              "$oid": "5e6cb93b942b27e8f4f027e2"
+          },
+          "row": 7,
+          "seat": 11,
+          "event": {
+              "$oid": "5e6cb93b942b27e8f4f027a2"
+          },
+          "price": 1500,
+          "color_zone": "#f0fc62"
+        }
+    ]
+  }, 
+  {
+    "_id": {
+          "$oid": "000002"
+    },
+    "password_to_cancel":"pbkdf2:sha256:150000$jHuG99KN$013958f3fbe87259e98kcadba0ee33d16ec9c0847444ac447f0173de4fc2dd0a",
+    "phone_number":"89906578154",
+    "event":"5e6cb93b942b27e8f4f027a3",
+    "tickets": [
+        {
+          "_id": {
+              "$oid": "5e6cb93b942b27e8f4f027r1"
+          },
+          "row": 9,
+          "seat": 1,
+          "event": {
+              "$oid": "5e6cb93b942b27e8f4f027a3"
+          },
+          "price": 1200,
+          "color_zone": "#fffa570"
+        },
+        {
+          "_id": {
+              "$oid": "5e6cb93b942b27e8f4f027r2"
+          },
+          "row": 9,
+          "seat": 2,
+          "event": {
+              "$oid": "5e6cb93b942b27e8f4f027a3"
+          },
+          "price": 1200,
+          "color_zone": "#ffa570"
+        }
+    ]
+  }
+]
