@@ -1,12 +1,13 @@
 """ Данные о мероприятиях для БД. """
 from datetime import datetime
 
-from . import MONGO
+from . import MONGO, counter_id
 
 
 def add_event1():
     """ Вставка первого события в БД и его билетов """
-    event1 = {"title":"Ромео и Джульетта",
+    event1 = {"_id": counter_id.get_next_id("event"),
+              "title":"Ромео и Джульетта",
               "author":"Уильям Шекспир",
               "photo":"https://wek.ru/webp/images/istoriya-romeo-i-dzhuletty-budet-imet-prodolzhenie.jpg",
               "start_time": datetime.fromisoformat("2020-05-01 15:00:00"),
@@ -19,7 +20,8 @@ def add_event1():
 
 def add_event2():
     """ Вставка второго события в БД  и его билетов """
-    event2 = {"title":"Бедные люди",
+    event2 = {"_id": counter_id.get_next_id("event"),
+              "title":"Бедные люди",
               "author":"Федор Достоевский",
               "photo":"https://img01.rl0.ru/afisha/-x712q65i/s4.afisha.ru/mediastorage/d0/ca/d0cabee4b7e349aabd58bf806422.jpg",
               "start_time": datetime.fromisoformat("2020-05-08 15:00:00"),
@@ -32,7 +34,8 @@ def add_event2():
 
 def add_event3():
     """ Вставка второго события в БД  и его билетов """
-    event3 = {"title":"Анна Каренина",
+    event3 = {"_id": counter_id.get_next_id("event"),
+              "title":"Анна Каренина",
               "author":"Лев Толстой",
               "photo":"http://www.vakhtangov.ru/slir/w400-h267/upload/media/7b11c52e46.jpg",
               "start_time": datetime.fromisoformat("2020-05-08 19:00:00"),
@@ -48,7 +51,8 @@ def add_tickets(id_event):
     """ Добавление билетов """
     for i in range(1, 14):
         for j in range(1, 22):
-            ticket = {"row": i,
+            ticket = {"_id": counter_id.get_next_id("ticket"),
+                      "row": i,
                       "seat": j,
                       "event": id_event,
                       "is_booked": False}

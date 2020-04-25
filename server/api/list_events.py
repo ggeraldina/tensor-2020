@@ -6,7 +6,7 @@ from server import APP, MONGO
 
 @APP.route("/api/<version>/get_list_events", methods=["GET"])
 def get_list_events(version):
-    """ Список мероприятий """
+    """ Получить список мероприятий """
     if version == "v1":
         skip = int(request.args.get("offset"))
         limit = int(request.args.get("limit"))
