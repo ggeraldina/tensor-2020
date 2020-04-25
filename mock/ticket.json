@@ -11,7 +11,7 @@
       },
       "price": 800,
       "color_zone": "#9497ff",
-      "is_booked": true,
+      "is_booked": true
   },
   {
       "_id": {

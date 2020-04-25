@@ -114,7 +114,7 @@
 
 3. Бронирование
 
-**/api/v1/add_booking?phone_number=&password_to_cancel=&event=&tickets=**
+**/api/v1/add_booking**
 
     frontend -> backend
     бронирование
@@ -133,7 +133,7 @@
 
 4. Просмотр действующих броней
 
-**/api/v1/get_list_bookings?phone_number=**
+**/api/v1/get_list_bookings**
 
     frontend -> backend
     просмотр броней
@@ -160,7 +160,7 @@
             }, ...
         ]
 
-**/api/v1/canсel_booking?id=&phone_number=&password_to_cancel=**
+**/api/v1/canсel_booking**
 
     frontend -> backend
     отмена брони
