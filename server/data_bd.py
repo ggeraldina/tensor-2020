@@ -52,6 +52,22 @@ def add_event3():
     event3["_id"] = MONGO.db.event.insert_one(event3).inserted_id
     add_tickets(event3["_id"])
 
+def add_mock_events(amount):
+    """ Вставка mock-событий в БД и их билетов """
+    for i in range(amount):
+        event = {
+            "_id": counter_id.get_next_id("event"),
+            "title":f"Название {i}",
+            "author":f"Автор {i}",
+            "photo":"https://www.photoforum.ru/f/photo/000/537/537839_66.jpg",
+            "start_time": datetime.fromisoformat(f"20{i}0-12-01 19:00:00"),
+            "end_time": datetime.fromisoformat(f"20{i}0-12-01 22:00:00"),
+            "discription":f"Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. \r\n Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}. Описание {i}.",
+            "director":f"Постановщик {i}",
+            "actors":f"Актеры {i},... "
+        }
+        event["_id"] = MONGO.db.event.insert_one(event).inserted_id
+        add_tickets(event["_id"])
 
 def add_tickets(id_event):
     """ Добавление билетов """

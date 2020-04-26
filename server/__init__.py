@@ -18,6 +18,7 @@ if os.environ.get("FLASK_ENV") == "development" and MONGO.db.event.count_documen
     data_bd.add_event1()
     data_bd.add_event2()
     data_bd.add_event3()
+    data_bd.add_mock_events(7)
 
 from . import views
 from .api import list_events, booking
