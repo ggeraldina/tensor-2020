@@ -20,5 +20,7 @@ def get_list_events(version):
             }
         ).sort("start_time").skip(skip).limit(limit)
         events = list(cursor)
+        for event in events:
+            event["id"] = event.pop("_id")
         return jsonify({"list_events": events})
     return jsonify({"message":"Некорректная версия", "list_events": []})
