@@ -11,13 +11,14 @@ from server.exception.error_data_db import ErrorDataDB
 @APP.route("/api/<version>/add_booking", methods=["POST"])
 def add_booking(version):
     """ Добавить бронь """
-    if version == "v1":   
+    if version == "v1":
         data = request.get_json()
         if not isinstance(data, dict):
             return jsonify({
                 "message": "В запросе должен быть передан словарь. Передан {}".format(type(data)),
-                "id": None, 
-                "is_success": False})
+                "id": None,
+                "is_success": False
+            })
         try:
             book_tickets = add_booking_for_tickets(data)
             booking_id = add_doc_booking(data, book_tickets)
