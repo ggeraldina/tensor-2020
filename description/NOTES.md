@@ -78,3 +78,18 @@ https://flask.palletsprojects.com/en/1.1.x/
 * Flask-PyMongo - https://flask-pymongo.readthedocs.io/en/latest/ - прямые запросы к БД.
 * Flask-MongoAlchemy - https://pythonhosted.org/Flask-MongoAlchemy/ - работа с БД через классы.
 * Flask-MongoEngine - http://docs.mongoengine.org/projects/flask-mongoengine/en/latest/ - работа с БД через классы.
+
+# MongoDB и Flask-PyMongo
+
+MongoDB - https://docs.mongodb.com/manual/introduction/
+
+Flask-PyMongo - https://flask-pymongo.readthedocs.io/en/latest/
+
+PyMongo - https://api.mongodb.com/python/current/tutorial.html
+
+Для работы с установленной на компьютер mongoDB нужно добавить в папку проекта `.env` с строкой
+    
+`MONGO_URI="mongodb://localhost:27017/theaterDB"`
+
+где `theaterDB` - имя БД.
+
