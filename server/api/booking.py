@@ -20,21 +20,21 @@ def add_booking(version):
                 "is_success": False
             })
         try:
-            book_tickets = add_booking_for_tickets(data)
+            book_tickets = add_booking_in_tickets(data)
             booking_id = add_doc_booking(data, book_tickets)
         except ErrorDataDB as error_bd:
             return jsonify({"message": error_bd.message, "id": None, "is_success": False})
         return jsonify({"id": booking_id, "is_success": True})
     return jsonify({"message":"Некорректная версия", "id": None, "is_success": False})
 
-def add_booking_for_tickets(data):
+def add_booking_in_tickets(data):
     """ Добавить информацию о бронировании в билеты """
     book_tickets = list()
     try:
         for ticket_info_id in data["tickets"]:
             ticket_id = parse_object_id(ticket_info_id["id"], book_tickets)
             before_updating_ticket = add_booking_in_ticket(ticket_id, book_tickets)
-            check_relative_event_ticket(
+            check_relation_event_and_ticket(
                 data["event"],
                 before_updating_ticket["event"],
                 book_tickets
@@ -44,18 +44,18 @@ def add_booking_for_tickets(data):
             del before_updating_ticket["is_booked"]
             book_tickets.append(before_updating_ticket)
     except KeyError as key_error:
-        rollback_booking_for_tickets(book_tickets)
+        rollback_booking_in_tickets(book_tickets)
         raise ErrorDataDB("Отсутствует ключ {}".format(key_error))
     except TypeError as type_error:
-        rollback_booking_for_tickets(book_tickets)
+        rollback_booking_in_tickets(book_tickets)
         raise ErrorDataDB("Неверный тип данных; {}".format(type_error))
     return book_tickets
 
-def check_relative_event_ticket(event_str_id, ticket_event_id, book_tickets):
+def check_relation_event_and_ticket(event_str_id, ticket_event_id, book_tickets):
     """ Проверить относится ли билет к событию.
     Если не относится, то выбросить исключение """
     if ticket_event_id != parse_object_id(event_str_id, book_tickets):
-        rollback_booking_for_tickets(book_tickets)
+        rollback_booking_in_tickets(book_tickets)
         raise ErrorDataDB("Билет относится к событию {}, а не {}".format(
             str(ticket_event_id),
             event_str_id
@@ -65,7 +65,7 @@ def check_booking_in_ticket(ticket_id, ticket_is_booked, book_tickets):
     """ Проверить бил ли билет уже забронирован.
     Если да, то выбросить исключение """
     if ticket_is_booked:
-        rollback_booking_for_tickets(book_tickets)
+        rollback_booking_in_tickets(book_tickets)
         raise ErrorDataDB("Билет {} уже забронирован".format(ticket_id))
 
 def add_booking_in_ticket(ticket_id, book_tickets):
@@ -77,7 +77,7 @@ def add_booking_in_ticket(ticket_id, book_tickets):
         return_document=ReturnDocument.BEFORE
     )
     if before_updating_ticket is None:
-        rollback_booking_for_tickets(book_tickets)
+        rollback_booking_in_tickets(book_tickets)
         raise ErrorDataDB("Билет {} не существует".format(ticket_id))
     return before_updating_ticket
 
@@ -86,10 +86,10 @@ def parse_object_id(str_id, book_tickets):
     try:
         return ObjectId(str_id)
     except errors.InvalidId:
-        rollback_booking_for_tickets(book_tickets)
+        rollback_booking_in_tickets(book_tickets)
         raise ErrorDataDB("Некорректный id: {}".format(str_id))
 
-def rollback_booking_for_tickets(book_tickets):
+def rollback_booking_in_tickets(book_tickets):
     """ Отменить брони для уже забронированных билетов,
     т.к. бронирование всех билетов невозможно """
     if book_tickets is None:
@@ -111,14 +111,14 @@ def add_doc_booking(data, book_tickets):
             "_id": counter_id.get_next_id("booking")
         }
     except KeyError as ex:
-        rollback_booking_for_tickets(book_tickets)
+        rollback_booking_in_tickets(book_tickets)
         raise ErrorDataDB("Отсутствует ключ {}".format(ex))
     return MONGO.db.booking.insert_one(booking).inserted_id
 
 def parse_phone_number(str_phone_number, book_tickets):
     """ Преобразовать номер телефона в int """
     if not str_phone_number.isdigit():
-        rollback_booking_for_tickets(book_tickets)
+        rollback_booking_in_tickets(book_tickets)
         raise ErrorDataDB(
             ("Некорректный phone_number: {}. Должны быть только цифры").format(str_phone_number)
         )
