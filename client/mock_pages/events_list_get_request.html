@@ -16,7 +16,7 @@
         let limit = 2
 
         document.getElementById("data").innerHTML=(
-            "/api/v1/get_list_events?offset=" 
+            "/api/v1/get_events_list?offset=" 
             + offset 
             + "&limit=" 
             + limit
@@ -24,7 +24,7 @@
 
         async function submit() {
             let response = await fetch(
-                "/api/v1/get_list_events?offset=" 
+                "/api/v1/get_events_list?offset=" 
                 + offset 
                 + "&limit=" 
                 + limit

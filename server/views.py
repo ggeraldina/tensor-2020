@@ -10,10 +10,10 @@ def index():
     """ Главная страница """
     return send_from_directory(APP.static_folder, 'index.html')
 
-@APP.route("/list_events")
-def list_events():
+@APP.route("/events_list")
+def events_list():
     """ Mock list events GET """
-    return send_from_directory(APP.static_folder, 'mock_pages/list_events_get_request.html')
+    return send_from_directory(APP.static_folder, 'mock_pages/events_list_get_request.html')
 
 @APP.route("/booking")
 def booking():

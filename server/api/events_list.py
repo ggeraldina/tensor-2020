@@ -5,16 +5,16 @@ from server import APP, MONGO
 from server.exception.error_data_db import ErrorDataDB
 
 
-@APP.route("/api/<version>/get_list_events", methods=["GET"])
-def get_list_events(version):
+@APP.route("/api/<version>/get_events_list", methods=["GET"])
+def get_events_list(version):
     """ Получить список мероприятий """
     if version != "v1":
-        return jsonify({"message":"Некорректная версия", "list_events": []})
+        return jsonify({"message":"Некорректная версия", "events_list": []})
     try:
         skip = parse_positive_int(request.args.get("offset"))
         limit = parse_positive_int(request.args.get("limit"))
     except ErrorDataDB as error_bd:
-        return jsonify({"message": error_bd.message, "list_events": []})
+        return jsonify({"message": error_bd.message, "events_list": []})
     cursor = MONGO.db.event.find(
         {},
         {
@@ -27,7 +27,7 @@ def get_list_events(version):
     events = list(cursor)
     for event in events:
         event["id"] = event.pop("_id")
-    return jsonify({"list_events": events})
+    return jsonify({"events_list": events})
 
 def parse_positive_int(value):
     """ Преобразовать в положительное целое число """

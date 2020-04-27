@@ -62,7 +62,7 @@
 
 1. Главная страница
 
-**/api/v1/get_list_events?offset=&limit=**
+**/api/v1/get_events_list?offset=&limit=**
 
     frontend -> backend
     подгрузка
@@ -70,7 +70,7 @@
         limit: integer - сколько передавать
     frontend <- backend
     список мероприятий
-        list_events: 
+        events_list: 
         [
             { 
                 id: ObjectId event
@@ -133,7 +133,7 @@
 
 4. Просмотр действующих броней
 
-**/api/v1/get_list_bookings**
+**/api/v1/get_bookings_list**
 
     frontend -> backend
     просмотр броней
