@@ -2,6 +2,7 @@
 from bson import ObjectId, errors
 from flask import jsonify, request
 from pymongo import ReturnDocument
+from pymongo.errors import ConnectionFailure, OperationFailure
 from pymongo.read_concern import ReadConcern
 from pymongo.read_preferences import ReadPreference
 from pymongo.write_concern import WriteConcern
@@ -19,32 +20,44 @@ def add_booking(version):
     try:
         data = request.get_json()
         check_request_dict(data)
-        with MONGO.cx.start_session() as session:
-            with session.start_transaction(
-                    read_concern=ReadConcern(level="snapshot"),
-                    write_concern=WriteConcern(w="majority"),
-                    read_preference=ReadPreference.PRIMARY
-                ):
-                book_tickets = add_booking_in_tickets(data, session)
-                booking_id = add_doc_booking(data, book_tickets, session)
-                # commit_with_retry(session)
+        while True:
+            try:
+                with MONGO.cx.start_session() as session:
+                    with session.start_transaction(
+                            read_concern=ReadConcern(level="snapshot"),
+                            write_concern=WriteConcern(w="majority"),
+                            read_preference=ReadPreference.PRIMARY
+                        ):
+                        book_tickets = add_booking_in_tickets(data, session)
+                        booking_id = add_doc_booking(data, book_tickets, session)
+                        commit_with_retry(session)
+            except (ConnectionFailure, OperationFailure) as ex:
+                if ex.has_error_label("TransientTransactionError"):
+                    print(
+                        "TransientTransactionError, повторная попытка "
+                        "транзакции ..."
+                    )
+                    continue
+                raise ErrorDataDB("O.o Что-то страшное при попытке транзакции")
     except ErrorDataDB as error_bd:
         return jsonify({"message": error_bd.message, "id": None, "is_success": False})
     return jsonify({"id": booking_id, "is_success": True})
 
-# def commit_with_retry(session):
-#     """ Commit транзакции """
-#     while True:
-#         try:
-#             session.commit_transaction()
-#             print("Transaction committed.")
-#             break
-#         except (ConnectionFailure, OperationFailure) as ex:
-#             if ex.has_error_label("UnknownTransactionCommitResult"):
-#                 print("UnknownTransactionCommitResult, повторная попытка "
-#                       "commit операции ...")
-#                 continue
-#             raise ErrorDataDB("Ошибка во время commit транзакции")
+def commit_with_retry(session):
+    """ Commit транзакции """
+    while True:
+        try:
+            session.commit_transaction()
+            print("Transaction committed.")
+            break
+        except (ConnectionFailure, OperationFailure) as ex:
+            if ex.has_error_label("UnknownTransactionCommitResult"):
+                print(
+                    "UnknownTransactionCommitResult, повторная попытка "
+                    "commit операции ..."
+                )
+                continue
+            raise ErrorDataDB("O.o Ошибка во время commit транзакции")
 
 def check_request_dict(data):
     """ Проверить тип входных данных. Должен быть передан словарь """
