@@ -4,6 +4,13 @@ from datetime import datetime
 from . import MONGO, counter_id
 
 
+def add_data_in_db():
+    """ Добавить данные в БД """
+    add_event1()
+    add_event2()
+    add_event3()
+    # add_mock_events(7)
+
 def add_event1():
     """ Вставка первого события в БД и его билетов """
     event1 = {
