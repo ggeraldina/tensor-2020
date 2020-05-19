@@ -13,8 +13,8 @@ def get_events_list(version):
     try:
         skip = parse_positive_int(request.args.get("offset"))
         limit = parse_positive_int(request.args.get("limit"))
-    except ErrorDataDB as error_bd:
-        return jsonify({"message": error_bd.message, "events_list": []})
+    except ErrorDataDB as error_db:
+        return jsonify({"message": error_db.message, "events_list": []})
     cursor = MONGO.db.event.find(
         {},
         {

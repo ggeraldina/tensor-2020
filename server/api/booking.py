@@ -22,6 +22,15 @@ def add_booking(version):
         check_request_dict(data)
         while True:
             try:
+                # Транзакции будут работать только с replica set серверами
+                # и не будут с автономным (standalone) сервером - наш случай.
+                # https://jira.mongodb.org/browse/CSHARP-2907
+                # Для standalone выбрасывается исключение OperationFailure
+                # с советом использовать retryWrites=False, но это не помогает.
+                # Для работы транзакций необходима конвертация сервера в replica set
+                # https://docs.mongodb.com/manual/tutorial/convert-standalone-to-replica-set/
+                #
+                # Либо нужно изменить БД так, чтобы можно было отказаться от транзакций
                 with MONGO.cx.start_session() as session:
                     with session.start_transaction(
                             read_concern=ReadConcern(level="snapshot"),
@@ -39,8 +48,8 @@ def add_booking(version):
                     )
                     continue
                 raise ErrorDataDB("O.o Что-то страшное при попытке транзакции")
-    except ErrorDataDB as error_bd:
-        return jsonify({"message": error_bd.message, "id": None, "is_success": False})
+    except ErrorDataDB as error_db:
+        return jsonify({"message": error_db.message, "id": None, "is_success": False})
     return jsonify({"id": booking_id, "is_success": True})
 
 def commit_with_retry(session):

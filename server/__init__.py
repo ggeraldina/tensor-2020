@@ -10,7 +10,7 @@ APP = Flask(__name__, static_folder="../client")
 APP.json_encoder = MongoJSONEncoder
 APP.config["JSON_AS_ASCII"] = False
 APP.config["MONGO_URI"] = os.environ["MONGO_URI"]
-MONGO = PyMongo(APP, retryWrites=False)
+MONGO = PyMongo(APP) # retryWrites=False, если вдруг потребуется
 
 from .database import create_collections
 
