@@ -23,14 +23,20 @@ def add_booking(version):
         while True:
             try:
                 # Транзакции будут работать только с replica set серверами
-                # и не будут с автономным (standalone) сервером - наш случай.
+                # и не будут с автономным (standalone) сервером
                 # https://jira.mongodb.org/browse/CSHARP-2907
-                # Для standalone выбрасывается исключение OperationFailure
-                # с советом использовать retryWrites=False, но это не помогает.
+                #
+                # Это значит, что транзакции будут работать с MongoDB Atlas,
+                # т.к. там уже все настроено как replica set;
+                # и, скорее всего, не будут работать с MongoDB на localhost,
+                # т.к. localhost без соответствующей настройки - это standalone.
+                #
+                # Для standalone при попытке использования транзакций
+                # выбрасывается исключение OperationFailure с советом
+                # использовать retryWrites=False, но это не поможет в данном случае.
+                #
                 # Для работы транзакций необходима конвертация сервера в replica set
                 # https://docs.mongodb.com/manual/tutorial/convert-standalone-to-replica-set/
-                #
-                # Либо нужно изменить БД так, чтобы можно было отказаться от транзакций
                 with MONGO.cx.start_session() as session:
                     with session.start_transaction(
                             read_concern=ReadConcern(level="snapshot"),
@@ -40,14 +46,15 @@ def add_booking(version):
                         book_tickets = add_booking_in_tickets(data, session)
                         booking_id = add_doc_booking(data, book_tickets, session)
                         commit_with_retry(session)
+                        break # Транзакция успешно завершилась commit'ом
             except (ConnectionFailure, OperationFailure) as ex:
                 if ex.has_error_label("TransientTransactionError"):
                     print(
-                        "TransientTransactionError, повторная попытка "
-                        "транзакции ..."
+                        "BOOKING INFO: TransientTransactionError,"
+                        "повторная попытка транзакции ..."
                     )
                     continue
-                raise ErrorDataDB("O.o Что-то страшное при попытке транзакции")
+                raise ErrorDataDB("O.o Что-то страшное при попытке транзакции в booking.py")
     except ErrorDataDB as error_db:
         return jsonify({"message": error_db.message, "id": None, "is_success": False})
     return jsonify({"id": booking_id, "is_success": True})
@@ -57,16 +64,16 @@ def commit_with_retry(session):
     while True:
         try:
             session.commit_transaction()
-            print("Transaction committed.")
+            print("BOOKING INFO: Transaction committed.")
             break
         except (ConnectionFailure, OperationFailure) as ex:
             if ex.has_error_label("UnknownTransactionCommitResult"):
                 print(
-                    "UnknownTransactionCommitResult, повторная попытка "
-                    "commit операции ..."
+                    "BOOKING INFO: UnknownTransactionCommitResult,"
+                    "повторная попытка commit операции ..."
                 )
                 continue
-            raise ErrorDataDB("O.o Ошибка во время commit транзакции")
+            raise ErrorDataDB("O.o Ошибка во время commit транзакции в booking.py")
 
 def check_request_dict(data):
     """ Проверить тип входных данных. Должен быть передан словарь """
@@ -104,7 +111,7 @@ def check_relation_event_and_ticket(event_str_id, ticket_event_id):
         ))
 
 def check_booking_in_ticket(ticket_id, ticket_is_booked):
-    """ Проверить бил ли билет уже забронирован.
+    """ Проверить был ли билет уже забронирован.
     Если да, то выбросить исключение """
     if ticket_is_booked:
         raise ErrorDataDB("Билет {} уже забронирован".format(ticket_id))
