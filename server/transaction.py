@@ -31,10 +31,10 @@ def run_transaction_with_retry(txn_func):
         while True:
             try:
                 with session.start_transaction(
-                        read_concern=ReadConcern(level="snapshot"),
-                        write_concern=WriteConcern(w="majority"),
-                        read_preference=ReadPreference.PRIMARY
-                    ):
+                    read_concern=ReadConcern(level="snapshot"),
+                    write_concern=WriteConcern(w="majority"),
+                    read_preference=ReadPreference.PRIMARY
+                ):
                     # Транзакция успешно завершилась commit'ом
                     # и функция успешно вернула результат
                     return txn_func(session, *args, **kwargs)
@@ -47,6 +47,7 @@ def run_transaction_with_retry(txn_func):
                     continue
                 raise ErrorDataDB("O.o Что-то страшное при попытке транзакции")
     return wrapper
+
 
 def commit_with_retry(session):
     """ Commit транзакции """

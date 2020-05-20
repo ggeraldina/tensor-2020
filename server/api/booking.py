@@ -14,7 +14,7 @@ from server.transaction import run_transaction_with_retry, commit_with_retry
 def add_booking(version):
     """ Добавить бронь """
     if version != "v1":
-        return jsonify({"message":"Некорректная версия", "id": None, "is_success": False})
+        return jsonify({"message": "Некорректная версия", "id": None, "is_success": False})
     try:
         data = request.get_json()
         check_request_dict(data)
@@ -24,6 +24,7 @@ def add_booking(version):
         return jsonify({"message": error_db.message, "id": None, "is_success": False})
     return jsonify({"id": booking_id, "is_success": True})
 
+
 @run_transaction_with_retry
 def txn_add_booking(session, data):
     """ Добавить бронь и информацию о ней в билеты """
@@ -32,10 +33,14 @@ def txn_add_booking(session, data):
     commit_with_retry(session)
     return booking_id
 
+
 def check_request_dict(data):
     """ Проверить тип входных данных. Должен быть передан словарь """
     if not isinstance(data, dict):
-        raise ErrorDataDB("В запросе должен быть передан словарь. Передан {}".format(type(data)))
+        raise ErrorDataDB(
+            "В запросе должен быть передан словарь. Передан {}".format(type(data))
+        )
+
 
 def add_booking_in_tickets(data, session):
     """ Добавить информацию о бронировании в билеты """
@@ -49,7 +54,9 @@ def add_booking_in_tickets(data, session):
                 before_updating_ticket["event"]
             )
             del before_updating_ticket["event"]
-            check_booking_in_ticket(ticket_id, before_updating_ticket["is_booked"])
+            check_booking_in_ticket(
+                ticket_id, before_updating_ticket["is_booked"]
+            )
             del before_updating_ticket["is_booked"]
             book_tickets.append(before_updating_ticket)
     except KeyError as key_error:
@@ -57,6 +64,7 @@ def add_booking_in_tickets(data, session):
     except TypeError as type_error:
         raise ErrorDataDB("Неверный тип данных; {}".format(type_error))
     return book_tickets
+
 
 def check_relation_event_and_ticket(event_str_id, ticket_event_id):
     """ Проверить относится ли билет к событию.
@@ -67,11 +75,13 @@ def check_relation_event_and_ticket(event_str_id, ticket_event_id):
             event_str_id
         ))
 
+
 def check_booking_in_ticket(ticket_id, ticket_is_booked):
     """ Проверить был ли билет уже забронирован.
     Если да, то выбросить исключение """
     if ticket_is_booked:
         raise ErrorDataDB("Билет {} уже забронирован".format(ticket_id))
+
 
 def add_booking_in_ticket(ticket_id, session):
     """ Добавить бронь в билет.
@@ -86,12 +96,14 @@ def add_booking_in_ticket(ticket_id, session):
         raise ErrorDataDB("Билет {} не существует".format(ticket_id))
     return before_updating_ticket
 
+
 def parse_object_id(str_id):
     """ Преобразовать id в ObjectId """
     try:
         return ObjectId(str_id)
     except errors.InvalidId:
         raise ErrorDataDB("Некорректный id: {}".format(str_id))
+
 
 def add_doc_booking(data, book_tickets, session):
     """ Добавить бронь в коллекцию booking """
@@ -106,6 +118,7 @@ def add_doc_booking(data, book_tickets, session):
     except KeyError as ex:
         raise ErrorDataDB("Отсутствует ключ {}".format(ex))
     return MONGO.db.booking.insert_one(booking, session=session).inserted_id
+
 
 def parse_phone_number(str_phone_number):
     """ Преобразовать номер телефона в int """

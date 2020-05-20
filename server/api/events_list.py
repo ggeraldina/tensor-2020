@@ -9,7 +9,7 @@ from server.exception.error_data_db import ErrorDataDB
 def get_events_list(version):
     """ Получить список мероприятий """
     if version != "v1":
-        return jsonify({"message":"Некорректная версия", "events_list": []})
+        return jsonify({"message": "Некорректная версия", "events_list": []})
     try:
         skip = parse_positive_int(request.args.get("offset"))
         limit = parse_positive_int(request.args.get("limit"))
@@ -28,6 +28,7 @@ def get_events_list(version):
     for event in events:
         event["id"] = event.pop("_id")
     return jsonify({"events_list": events})
+
 
 def parse_positive_int(value):
     """ Преобразовать в положительное целое число """
