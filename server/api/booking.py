@@ -2,14 +2,12 @@
 from bson import ObjectId, errors
 from flask import jsonify, request
 from pymongo import ReturnDocument
-from pymongo.errors import ConnectionFailure, OperationFailure
-from pymongo.read_concern import ReadConcern
-from pymongo.read_preferences import ReadPreference
-from pymongo.write_concern import WriteConcern
+
 from werkzeug.security import generate_password_hash
 
 from server import APP, MONGO, counter_id
 from server.exception.error_data_db import ErrorDataDB
+from server.transaction import run_transaction_with_retry, commit_with_retry
 
 
 @APP.route("/api/<version>/add_booking", methods=["POST"])
@@ -20,60 +18,19 @@ def add_booking(version):
     try:
         data = request.get_json()
         check_request_dict(data)
-        while True:
-            try:
-                # Транзакции будут работать только с replica set серверами
-                # и не будут с автономным (standalone) сервером
-                # https://jira.mongodb.org/browse/CSHARP-2907
-                #
-                # Это значит, что транзакции будут работать с MongoDB Atlas,
-                # т.к. там уже все настроено как replica set;
-                # и, скорее всего, не будут работать с MongoDB на localhost,
-                # т.к. localhost без соответствующей настройки - это standalone.
-                #
-                # Для standalone при попытке использования транзакций
-                # выбрасывается исключение OperationFailure с советом
-                # использовать retryWrites=False, но это не поможет в данном случае.
-                #
-                # Для работы транзакций необходима конвертация сервера в replica set
-                # https://docs.mongodb.com/manual/tutorial/convert-standalone-to-replica-set/
-                with MONGO.cx.start_session() as session:
-                    with session.start_transaction(
-                            read_concern=ReadConcern(level="snapshot"),
-                            write_concern=WriteConcern(w="majority"),
-                            read_preference=ReadPreference.PRIMARY
-                        ):
-                        book_tickets = add_booking_in_tickets(data, session)
-                        booking_id = add_doc_booking(data, book_tickets, session)
-                        commit_with_retry(session)
-                        break # Транзакция успешно завершилась commit'ом
-            except (ConnectionFailure, OperationFailure) as ex:
-                if ex.has_error_label("TransientTransactionError"):
-                    print(
-                        "BOOKING INFO: TransientTransactionError,"
-                        "повторная попытка транзакции ..."
-                    )
-                    continue
-                raise ErrorDataDB("O.o Что-то страшное при попытке транзакции в booking.py")
+        with MONGO.cx.start_session() as session:
+            booking_id = txn_add_booking(session, data)
     except ErrorDataDB as error_db:
         return jsonify({"message": error_db.message, "id": None, "is_success": False})
     return jsonify({"id": booking_id, "is_success": True})
 
-def commit_with_retry(session):
-    """ Commit транзакции """
-    while True:
-        try:
-            session.commit_transaction()
-            print("BOOKING INFO: Transaction committed.")
-            break
-        except (ConnectionFailure, OperationFailure) as ex:
-            if ex.has_error_label("UnknownTransactionCommitResult"):
-                print(
-                    "BOOKING INFO: UnknownTransactionCommitResult,"
-                    "повторная попытка commit операции ..."
-                )
-                continue
-            raise ErrorDataDB("O.o Ошибка во время commit транзакции в booking.py")
+@run_transaction_with_retry
+def txn_add_booking(session, data):
+    """ Добавить бронь и информацию о ней в билеты """
+    book_tickets = add_booking_in_tickets(data, session)
+    booking_id = add_doc_booking(data, book_tickets, session)
+    commit_with_retry(session)
+    return booking_id
 
 def check_request_dict(data):
     """ Проверить тип входных данных. Должен быть передан словарь """
