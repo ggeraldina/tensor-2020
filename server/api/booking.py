@@ -25,6 +25,15 @@ def add_booking(version):
     return jsonify({"id": booking_id, "is_success": True})
 
 
+def check_request_dict(data):
+    """ Проверить тип входных данных. Должен быть передан словарь """
+    if not isinstance(data, dict):
+        raise ErrorDataDB(
+            "В запросе должен быть передан словарь. Передан {}".format(
+                type(data))
+        )
+
+
 @run_transaction_with_retry
 def txn_add_booking(session, data):
     """ Добавить бронь и информацию о ней в билеты """
@@ -32,14 +41,6 @@ def txn_add_booking(session, data):
     booking_id = add_doc_booking(data, book_tickets, session)
     commit_with_retry(session)
     return booking_id
-
-
-def check_request_dict(data):
-    """ Проверить тип входных данных. Должен быть передан словарь """
-    if not isinstance(data, dict):
-        raise ErrorDataDB(
-            "В запросе должен быть передан словарь. Передан {}".format(type(data))
-        )
 
 
 def add_booking_in_tickets(data, session):
@@ -66,21 +67,12 @@ def add_booking_in_tickets(data, session):
     return book_tickets
 
 
-def check_relation_event_and_ticket(event_str_id, ticket_event_id):
-    """ Проверить относится ли билет к событию.
-    Если не относится, то выбросить исключение """
-    if ticket_event_id != parse_object_id(event_str_id):
-        raise ErrorDataDB("Билет относится к событию {}, а не {}".format(
-            str(ticket_event_id),
-            event_str_id
-        ))
-
-
-def check_booking_in_ticket(ticket_id, ticket_is_booked):
-    """ Проверить был ли билет уже забронирован.
-    Если да, то выбросить исключение """
-    if ticket_is_booked:
-        raise ErrorDataDB("Билет {} уже забронирован".format(ticket_id))
+def parse_object_id(str_id):
+    """ Преобразовать id в ObjectId """
+    try:
+        return ObjectId(str_id)
+    except errors.InvalidId:
+        raise ErrorDataDB("Некорректный id: {}".format(str_id))
 
 
 def add_booking_in_ticket(ticket_id, session):
@@ -97,12 +89,21 @@ def add_booking_in_ticket(ticket_id, session):
     return before_updating_ticket
 
 
-def parse_object_id(str_id):
-    """ Преобразовать id в ObjectId """
-    try:
-        return ObjectId(str_id)
-    except errors.InvalidId:
-        raise ErrorDataDB("Некорректный id: {}".format(str_id))
+def check_relation_event_and_ticket(event_str_id, ticket_event_id):
+    """ Проверить относится ли билет к событию.
+    Если не относится, то выбросить исключение """
+    if ticket_event_id != parse_object_id(event_str_id):
+        raise ErrorDataDB("Билет относится к событию {}, а не {}".format(
+            str(ticket_event_id),
+            event_str_id
+        ))
+
+
+def check_booking_in_ticket(ticket_id, ticket_is_booked):
+    """ Проверить был ли билет уже забронирован.
+    Если да, то выбросить исключение """
+    if ticket_is_booked:
+        raise ErrorDataDB("Билет {} уже забронирован".format(ticket_id))
 
 
 def add_doc_booking(data, book_tickets, session):
@@ -124,6 +125,8 @@ def parse_phone_number(str_phone_number):
     """ Преобразовать номер телефона в int """
     if not str_phone_number.isdigit():
         raise ErrorDataDB(
-            ("Некорректный phone_number: {}. Должны быть только цифры").format(str_phone_number)
+            ("Некорректный phone_number: {}. Должны быть только цифры").format(
+                str_phone_number
+            )
         )
     return int(str_phone_number)
