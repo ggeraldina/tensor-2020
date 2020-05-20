@@ -6,7 +6,7 @@ from pymongo.read_concern import ReadConcern
 from pymongo.read_preferences import ReadPreference
 from pymongo.write_concern import WriteConcern
 
-from .exception.error_data_db import ErrorDataDB
+from server.exception.error_data_db import ErrorDataDB
 
 
 # Транзакции будут работать только с replica set серверами

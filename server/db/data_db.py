@@ -1,7 +1,8 @@
 """ Данные о мероприятиях для БД. """
 from datetime import datetime
 
-from . import MONGO, counter_id
+from server import MONGO
+from server.db import counter_id
 
 
 def add_data_in_db():

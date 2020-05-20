@@ -1,7 +1,7 @@
 """ Автоинкрементный идентификатор MongoDB """
 from bson import ObjectId
 
-from . import MONGO
+from server import MONGO
 
 
 def get_next_id(collection_name, session=None):

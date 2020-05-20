@@ -1,7 +1,7 @@
 """ Создание коллекций БД """
 from pymongo.write_concern import WriteConcern
 
-from . import MONGO
+from server import MONGO
 
 
 def create_collections():

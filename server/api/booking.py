@@ -1,13 +1,14 @@
 """ Создание брони """
-from bson import ObjectId, errors
 from flask import jsonify, request
 from pymongo import ReturnDocument
-
 from werkzeug.security import generate_password_hash
 
-from server import APP, MONGO, counter_id
+from server import APP, MONGO
+from server.db import counter_id
 from server.exception.error_data_db import ErrorDataDB
-from server.transaction import run_transaction_with_retry, commit_with_retry
+from server.utils.parsers import parse_object_id, parse_phone_number
+from server.utils.transaction import (commit_with_retry,
+                                      run_transaction_with_retry)
 
 
 @APP.route("/api/<version>/add_booking", methods=["POST"])
@@ -67,14 +68,6 @@ def add_booking_in_tickets(data, session):
     return book_tickets
 
 
-def parse_object_id(str_id):
-    """ Преобразовать id в ObjectId """
-    try:
-        return ObjectId(str_id)
-    except errors.InvalidId:
-        raise ErrorDataDB("Некорректный id: {}".format(str_id))
-
-
 def add_booking_in_ticket(ticket_id, session):
     """ Добавить бронь в билет.
     Возвращает билет со всей информацией до бронирования """
@@ -119,14 +112,3 @@ def add_doc_booking(data, book_tickets, session):
     except KeyError as ex:
         raise ErrorDataDB("Отсутствует ключ {}".format(ex))
     return MONGO.db.booking.insert_one(booking, session=session).inserted_id
-
-
-def parse_phone_number(str_phone_number):
-    """ Преобразовать номер телефона в int """
-    if not str_phone_number.isdigit():
-        raise ErrorDataDB(
-            ("Некорректный phone_number: {}. Должны быть только цифры").format(
-                str_phone_number
-            )
-        )
-    return int(str_phone_number)
