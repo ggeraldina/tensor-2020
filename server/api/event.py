@@ -1,4 +1,4 @@
-""" Список мероприятий для главной страницы """
+""" Мероприятие """
 from flask import jsonify, request
 
 from server import APP, MONGO
@@ -8,7 +8,7 @@ from server.utils.parsers import parse_object_id
 
 @APP.route("/api/<version>/get_event", methods=["GET"])
 def get_event(version):
-    """ Получить список мероприятий """
+    """ Получить мероприятие и список билетов """
     if version != "v1":
         return jsonify({"message": "Некорректная версия", "event": {}, "tickets": []})
     try:
