@@ -21,3 +21,9 @@ def events_list():
 def booking():
     """ Mock booking POST """
     return send_from_directory(APP.static_folder, 'mock_pages/booking_post_request.html')
+
+
+@APP.route("/event")
+def event():
+    """ Mock event GET """
+    return send_from_directory(APP.static_folder, 'mock_pages/event_get_request.html')
