@@ -4,9 +4,12 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Main from '../../pages/main';
 import Reservation from '../../pages/reservation';
 import Header from '../Header/Header';
+import { Provider } from 'react-redux';
+import store from '../../store/store';
 
 function App() {
-    return (      
+    return (    
+        <Provider store={store}>  
         <BrowserRouter>
          <div>
            <Header />
@@ -16,6 +19,7 @@ function App() {
             </Switch>
          </div> 
        </BrowserRouter>
+       </ Provider>
     );
 }
 
