@@ -31,16 +31,15 @@ def get_events_list(version):
     hasmore = is_has_more_event(skip, limit)
     return jsonify({"events_list": events, "hasmore": hasmore})
 
+
 def is_has_more_event(skip, limit):
     """ Есть ли еще мероприятия? """
-    try:
-        offset = skip + limit
-        count = int(MONGO.db.event.count())
-        if offset >= count:
-            return False
-        return True
-    except ValueError:
-        raise ErrorDataDB("Ошибка при получении количества оствшихся мероприятий")
+    offset = skip + limit
+    count = MONGO.db.event.count()
+    if offset >= count:
+        return False
+    return True
+
 
 def parse_positive_int(value):
     """ Преобразовать в положительное целое число """
