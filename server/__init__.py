@@ -6,7 +6,7 @@ from flask_pymongo import PyMongo
 
 from .utils.encoder import MongoJSONEncoder
 
-APP = Flask(__name__, static_folder="../client")
+APP = Flask(__name__, static_folder="../client/build", static_url_path='/')
 APP.json_encoder = MongoJSONEncoder
 APP.config["JSON_AS_ASCII"] = False
 APP.config["MONGO_URI"] = os.environ["MONGO_URI"]
@@ -15,11 +15,6 @@ MONGO = PyMongo(APP)
 from .db.database import create_collections
 
 create_collections()
-
-from .db.data_db import add_data_in_db
-
-if os.environ.get("FLASK_ENV") == "development" and MONGO.db.event.count_documents({}) == 0:
-    add_data_in_db()
 
 from . import views
 from .api import events_list, booking, event, bookings_list
