@@ -35,7 +35,7 @@ def is_has_more_event(skip, limit):
     """ Есть ли еще мероприятия? """
     try:
         offset = skip + limit
-        count = int(MONGO.db.counter.find_one({"_id": "event"}, {"_id": 0})["count"])
+        count = int(MONGO.db.event.count())
         if offset >= count:
             return False
         return True
