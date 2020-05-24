@@ -1,9 +1,8 @@
 {
-  "name": "client",
+  "name": "tensor-2020",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
-    "postinstall": "cd client && npm run-script build"
+    "postinstall": "npm install --prefix client && npm run-script build --prefix client"
   },
   "engines": {
     "node": "^12.16.1",
