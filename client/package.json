@@ -12,6 +12,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
     "axios": "^0.19.2",
     "concurrently": "^5.2.0",
     "node-sass": "^4.14.1",
@@ -24,9 +25,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build --env.BASE_URL=https://www.tensor-2020-test.herokuapp.com",
-    "server": "node server.js",
-    "dev": "concurrently \"npm run server\" \"npm start\""
+    "build": "react-scripts build",
+    "server": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -11,5 +11,5 @@ export type TCard = {
 
 export type TCardList = {
     events_list: TCard[];
-    hasMore: boolean;
+    hasmore: boolean;
 };

@@ -5,7 +5,7 @@ import { fetchCardList } from '../../api/cardList';
 import { useDispatch } from 'react-redux';
 
 const CardList: React.SFC<TCardList> = (props): JSX.Element => {
-  const { events_list, hasMore } = props;
+  const { events_list, hasmore } = props;
   const [params, setParams] = useState({
     limit: 6,
     offset: 6,
@@ -29,7 +29,7 @@ const CardList: React.SFC<TCardList> = (props): JSX.Element => {
                 </li>
             ))}
         </ul>
-        {hasMore && (
+        {hasmore && (
             <button className="card-list__more" type="button" onClick={getMoreCards}>
                 Больше спектаклей
             </button>
