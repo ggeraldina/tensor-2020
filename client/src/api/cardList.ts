@@ -6,10 +6,14 @@ export const baseUrl = process.env.BASE_URL ? process.env.BASE_URL : 'http://loc
 
 export const fetchCardList = createAsyncThunk(
   'cardList/fetch',
-  async () => {
+  async (params: {limit: number, offset: number}) => {
     const response = await axios({
       method: 'GET',
       url: `${baseUrl}/get_list_events/`,
+      params: {
+        limit: params.limit,
+        offset: params.offset
+      }
     });
     return response.data as TCardList;
   }
