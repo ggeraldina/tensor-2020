@@ -10,6 +10,6 @@ export type TCard = {
 }
 
 export type TCardList = {
-    items: TCard[];
+    events_list: TCard[];
     hasMore: boolean;
 };

@@ -5,13 +5,13 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
-        margin: 0 -45px;
+        margin: 0 -30px;
         text-align: left;
     }
 
     &__item {
-        width: calc(33% - 60px);
-        margin: 0 30px 30px;
+        width: calc(33% - 30px);
+        margin: 0 15px 30px;
     }
 
     &__more {

@@ -5,7 +5,7 @@ import { fetchCardList } from '../../api/cardList';
 import { useDispatch } from 'react-redux';
 
 const CardList: React.SFC<TCardList> = (props): JSX.Element => {
-  const { items, hasMore } = props;
+  const { events_list, hasMore } = props;
   const [params, setParams] = useState({
     limit: 6,
     offset: 6,
@@ -22,7 +22,7 @@ const CardList: React.SFC<TCardList> = (props): JSX.Element => {
   return (
       <div className="card-list container">
         <ul className="card-list__list">
-            {items.map(card => (
+            {events_list.map(card => (
                 <li className="card-list__item" key={card.id}>
                     <Card id={card.id} title={card.title}
                           photo={card.photo} start_time={card.start_time}/>
