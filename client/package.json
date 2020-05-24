@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build --env.BASE_URL=https://www.tensor-2020-test.herokuapp.com",
     "server": "node server.js",
     "dev": "concurrently \"npm run server\" \"npm start\""
   },
