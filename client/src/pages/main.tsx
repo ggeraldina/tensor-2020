@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { fetchCardList } from '../api/cardList';
 import { useSelector } from '../helpers/useTypedSelector';
 import { useDispatch } from 'react-redux';
@@ -10,12 +10,12 @@ const Main = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCardList());
+        dispatch(fetchCardList({limit: 6, offset: 0}));
     }, []);
 
     return (
        <div className="main">
-          <CardList items={cardList.items} hasMore={cardList.hasMore}/>
+          <CardList items={cardList.items} hasMore={cardList.hasMore} />
           <Footer />
        </div>
     );

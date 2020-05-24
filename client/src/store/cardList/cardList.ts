@@ -10,7 +10,7 @@ const initialState: TCardList = {
 export const cardList = createReducer(initialState, builder =>
   builder
     .addCase(fetchCardList.fulfilled, (state, { payload }) => {
-      state.items = payload.items;
+      state.items.push(...payload.items);
       state.hasMore = payload.hasMore;
       return state;
     })
