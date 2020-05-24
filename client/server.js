@@ -25,6 +25,11 @@ server.get('/example/', (req, res) => {
   res.jsonp(SUCCESS);
 });
 
+server.get('/get_list_events/', (req, res) => {
+  const SUCCESS = require('./data/CARD_LIST.json');
+  res.jsonp(SUCCESS);
+});
+
 server.use(router);
 server.listen(1234, () => {
   console.info('JSON Server is running on port 1234');
