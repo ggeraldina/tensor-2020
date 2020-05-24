@@ -1,0 +1,26 @@
+.card-list {
+    padding: 70px 65px;
+    text-align: center;
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -45px;
+        text-align: left;
+    }
+
+    &__item {
+        width: calc(33% - 60px);
+        margin: 0 30px 30px;
+    }
+
+    &__more {
+        width: 260px;
+        height: 60px;
+        margin: 20px auto 0;
+        font-size: 22px;
+        color: #ffffff;
+        background-color: #222222;
+        border-radius: 2px;
+    }
+}
