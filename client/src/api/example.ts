@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { TExample } from '../types';
 
-export const baseUrl = process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:1234';
+export const baseUrl = process.env.BASE_URL ? process.env.BASE_URL : 'http://localhost:5000';
 
 export const fetchExample = createAsyncThunk(
   'example/fetch',
