@@ -1,11 +1,11 @@
 import React from 'react';
 import Footer from '../components/Footer/Footer';
-import Empty from '../components/Empty/Empty';
+import Error from '../components/Error/Error';
  
 const Custom500 = () => {
     return (
        <div className="main">
-            <Empty />
+            <Error />
             <Footer />
        </div>
     );

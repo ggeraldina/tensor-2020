@@ -15,7 +15,6 @@ const CardList: React.SFC<TCardList> = (props): JSX.Element => {
 
   const getMoreCards = (): void => {
       setParams({ limit: params.limit, offset: params.limit + params.offset });
-      console.log(params.offset);
       dispatch(fetchCardList({limit: params.limit, offset: params.offset}));
   };
 
