@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { fetchCardList } from '../api/cardList';
 import { useSelector } from '../helpers/useTypedSelector';
 import { useDispatch } from 'react-redux';
@@ -11,7 +11,7 @@ const Main = () => {
 
     useEffect(() => {
         dispatch(fetchCardList({limit: 6, offset: 0}));
-    }, []);
+    }, [dispatch]);
 
     return (
        <div className="main">
