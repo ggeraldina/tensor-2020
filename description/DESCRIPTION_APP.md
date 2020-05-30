@@ -62,7 +62,7 @@
 
 1. Главная страница
 
-**/api/v1/get_events_list?offset=&limit=**
+**/api/v1/get_events_list?offset=0&limit=1**
 
     frontend -> backend
     подгрузка
@@ -83,7 +83,7 @@
 
 2. Страница мероприятия
 
-**/api/v1/get_event?id=**
+**/api/v1/get_event?id=000000000000000000000001**
 
     frontend -> backend
     переход к подробному описанию
@@ -134,7 +134,7 @@
 
 4. Просмотр действующих броней
 
-**/api/v1/get_bookings_list**
+**/api/v1/get_bookings_list?phone_number=88005353535**
 
     frontend -> backend
     просмотр броней
