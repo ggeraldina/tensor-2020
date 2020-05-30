@@ -1,0 +1,24 @@
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 214px);
+
+    &__top {
+        font-size: 90px;
+        line-height: 1;
+    }
+
+    &__title {
+        margin: 10px 0 20px;
+        font-size: 30px;
+        line-height: 1;
+    }
+
+    &__text {
+        margin: 0 0 30px;
+        font-size: 18px;
+        line-height: 1;
+    }
+}

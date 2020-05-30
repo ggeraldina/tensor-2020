@@ -1,0 +1,11 @@
+{
+  "name": "tensor-2020",
+  "version": "0.1.0",
+  "scripts": {
+    "postinstall": "npm install --prefix client && npm run-script build --prefix client"
+  },
+  "engines": {
+    "node": "^12.16.1",
+    "npm": "^6.13.4"
+  }
+}

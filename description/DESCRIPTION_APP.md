@@ -14,7 +14,7 @@
 ### Минимум
 
     events:
-        _id: ObjectId
+        _id: ObjectId - номер 1, 2, 3
         title: string - название мероприятия
         author: string - автор
         photo: string - ссылка на фото url
@@ -25,7 +25,7 @@
         actors: string - актеры; список текстом
 
     tickets:
-        _id: ObjectId
+        _id: ObjectId - номер 1, 2, 3
         row: integer - ряд
         seat: integer - место
         event: ObjectId events- мероприятие
@@ -34,13 +34,13 @@
         is_booked: boolean - забронировано
 
     bookings: 
-        _id: integer - номер 1, 2, 3
+        _id: ObjectId - номер 1, 2, 3
         password_to_cancel: hash - пароль для отмены брони
         phone_number: integer - номер телефона
         event: ObjectId events- мероприятие
         tickets: [
             {   
-                _id: ObjectId
+                _id: ObjectId - номер 1, 2, 3
                 row: integer - ряд
                 seat: integer - место
                 price: integer - цена
@@ -62,7 +62,7 @@
 
 1. Главная страница
 
-**/api/v1/get_list_events?offset=&limit=**
+**/api/v1/get_events_list?offset=&limit=**
 
     frontend -> backend
     подгрузка
@@ -70,15 +70,16 @@
         limit: integer - сколько передавать
     frontend <- backend
     список мероприятий
-        list_events: 
+        events_list: 
         [
             { 
-                _id: ObjectId event
+                id: ObjectId event
                 title: string - название мероприятия
                 photo: string - ссылка на фото url
                 start_time: datetime - день и время начала мероприятия
             }, ...
         ]
+        hasmore: boolean - есть ли еще события
 
 2. Страница мероприятия
 
@@ -86,12 +87,12 @@
 
     frontend -> backend
     переход к подробному описанию
-        _id: ObjectId event - id мероприятия
+        id: ObjectId event - id мероприятия
     frontend <- backend
     описание мероприятия, информация о билетах
         event:
         {
-            _id: ObjectId event - id мероприятия
+            id: ObjectId event - id мероприятия
             title: string - название мероприятия
             photo: string - ссылка на фото url
             start_time: datetime - день и время начала мероприятия
@@ -103,7 +104,7 @@
         tickets:
         [
             {
-                _id: ObjectId ticket - id билета
+                id: ObjectId ticket - id билета
                 row: integer - ряд
                 seat: integer - место
                 price: integer - цена
@@ -114,7 +115,7 @@
 
 3. Бронирование
 
-**/api/v1/add_booking?phone_number=&password_to_cancel=&event=&tickets=**
+**/api/v1/add_booking**
 
     frontend -> backend
     бронирование
@@ -123,17 +124,17 @@
         event: ObjectId event - id мероприятия
         tickets: [
             { 
-                _id: ObjectId ticket - id билета
+                id: ObjectId ticket - id билета
             }, ...
         ]
     frontend <- backend
     успешное бронирование
-        _id: integer - id брони
+        id: integer - id брони
         is_success: boolean - успешно ли забронировано
 
 4. Просмотр действующих броней
 
-**/api/v1/get_list_bookings?phone_number=**
+**/api/v1/get_bookings_list**
 
     frontend -> backend
     просмотр броней
@@ -143,14 +144,14 @@
         bookings:
         [
             {   
-                _id: integer - id брони
+                id: integer - id брони
                 event: {
-                    _id: ObjectId event - id мероприятия
+                    id: ObjectId event - id мероприятия
                     title: string - название мероприятия
                     start_time: datetime - день и время начала мероприятия
                 }
                 tickets: [
-                    {   _id: ObjectId - id билета
+                    {   id: ObjectId - id билета
                         row: integer - ряд
                         seat: integer - место
                         price: integer - цена
@@ -160,11 +161,11 @@
             }, ...
         ]
 
-**/api/v1/canсel_booking?id=&phone_number=&password_to_cancel=**
+**/api/v1/canсel_booking**
 
     frontend -> backend
     отмена брони
-        _id: integer - номер брони 1, 2, 3
+        id: integer - номер брони 1, 2, 3
         phone_number: integer - номер телефона
         password_to_cancel: string - пароль для отмены брони
     frontend <- backend

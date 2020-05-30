@@ -1,0 +1,41 @@
+{
+    "events_list": [
+        {
+            "id": "121fgp",
+            "title": "Ромео и Джульетта",
+            "photo": "https://wek.ru/webp/images/istoriya-romeo-i-dzhuletty-budet-imet-prodolzhenie.jpg",
+            "start_time": "2020-05-01T15:00:00"
+        },
+        {
+            "id": "121fgl",
+            "title": "Ромео и Джульетта",
+            "photo": "https://wek.ru/webp/images/istoriya-romeo-i-dzhuletty-budet-imet-prodolzhenie.jpg",
+            "start_time": "2020-05-01T15:00:00"
+        },
+        {
+            "id": "121fga",
+            "title": "Ромео и Джульетта",
+            "photo": "https://wek.ru/webp/images/istoriya-romeo-i-dzhuletty-budet-imet-prodolzhenie.jpg",
+            "start_time": "2020-05-01T15:00:00"
+        },
+        {
+            "id": "121fgs",
+            "title": "Ромео и Джульетта",
+            "photo": "https://wek.ru/webp/images/istoriya-romeo-i-dzhuletty-budet-imet-prodolzhenie.jpg",
+            "start_time": "2020-05-01T15:00:00"
+        },
+        {
+            "id": "121fgd",
+            "title": "Ромео и Джульетта",
+            "photo": "https://wek.ru/webp/images/istoriya-romeo-i-dzhuletty-budet-imet-prodolzhenie.jpg",
+            "start_time": "2020-05-01T15:00:00"
+        },
+        {
+            "id": "121fgf",
+            "title": "Ромео и Джульетта",
+            "photo": "https://wek.ru/webp/images/istoriya-romeo-i-dzhuletty-budet-imet-prodolzhenie.jpg",
+            "start_time": "2020-05-01T15:00:00"
+        }
+    ],
+    "hasMore": true
+}
