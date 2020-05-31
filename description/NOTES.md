@@ -98,20 +98,28 @@ PyMongo - https://api.mongodb.com/python/current/tutorial.html
 
 Установить Python ≥3.7
 
-Создать в корне проекта .env с переменной окружения MONGO_URI:
+Создать в корне проекта **.env** с переменной окружения MONGO_URI:
+
 `MONGO_URI="mongodb+srv://UserMongo:ПАРОЛЬ@clustermongodb-pxklu.mongodb.net/theaterDBdev?retryWrites=true&w=majority"`, где ПАРОЛЬ - это ваш пароль :)
 
 В корне проекта:
+
 `python -m venv venv` // Создание виртуальной среды
+
 `venv\Scripts\activate` // Активация виртуальной среды в Windows
+
 `pip install -r requirements.txt` // Установка Python зависимостей приложения
 
 `cd client`
+
 В client:
+
 `npm install`  // Установка JavaScript зависимостей
+
 `npm run-script build`  // Создание build для prodaction
 
 Потом в VS Code жмякнуть на кнопочку ► Development в секции Run
+
 Приложение будет на http://127.0.0.1:5000/
 
 При каждом изменении на frontend будет нужно заново создавать папку build
