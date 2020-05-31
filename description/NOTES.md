@@ -15,7 +15,6 @@ https://tensor-2020-test.herokuapp.com/ - тестовая версия (develop
 https://flask.palletsprojects.com/en/1.1.x/
 
 ---
----
 
 ## Начальная настройка
 
@@ -69,7 +68,6 @@ https://flask.palletsprojects.com/en/1.1.x/
     *Еще есть .flaskenv, если в нем настроить `FLASK_APP=app.py` и `FLASK_ENV=development`, то все работает, как надо. Но не факт, что так делать правильно.*
 
 ---
----
 
 # MongoDB
 
@@ -92,4 +90,31 @@ PyMongo - https://api.mongodb.com/python/current/tutorial.html
 `MONGO_URI="mongodb://localhost:27017/theaterDB"`
 
 где `theaterDB` - имя БД.
+
+
+---
+
+# Работа с проектом в VS Code
+
+Установить Python ≥3.7
+
+Создать в корне проекта .env с переменной окружения MONGO_URI:
+`MONGO_URI="mongodb+srv://UserMongo:ПАРОЛЬ@clustermongodb-pxklu.mongodb.net/theaterDBdev?retryWrites=true&w=majority"`, где ПАРОЛЬ - это ваш пароль :)
+
+В корне проекта:
+`python -m venv venv` // Создание виртуальной среды
+`venv\Scripts\activate` // Активация виртуальной среды в Windows
+`pip install -r requirements.txt` // Установка Python зависимостей приложения
+
+`cd client`
+В client:
+`npm install`  // Установка JavaScript зависимостей
+`npm run-script build`  // Создание build для prodaction
+
+Потом в VS Code жмякнуть на кнопочку ► Development в секции Run
+Приложение будет на http://127.0.0.1:5000/
+
+При каждом изменении на frontend будет нужно заново создавать папку build
+
+package.json в корне проекта предназначен для heroku
 
