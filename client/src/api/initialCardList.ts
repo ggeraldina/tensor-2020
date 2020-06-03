@@ -2,15 +2,15 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { TCardList } from '../types';
 
-export const fetchCardList = createAsyncThunk(
-  'cardList/fetch',
-  async (params: {limit: number, offset: number}) => {
+export const fetchInitialCardList = createAsyncThunk(
+  'initialCardList/fetch',
+  async () => {
     const response = await axios({
       method: 'GET',
       url: `https://tensor-2020-test.herokuapp.com/api/v1/get_events_list`,
       params: {
-        limit: params.limit,
-        offset: params.offset
+        limit: 6,
+        offset: 0
       }
     });
     return response.data as TCardList;
