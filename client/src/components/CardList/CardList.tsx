@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { TCardList } from '../../types';
+import { IEventList } from '../../types';
 import Card from '../Card/Card';
 import { fetchCardList } from '../../api/cardList';
 import { useDispatch } from 'react-redux';
 
-const CardList: React.SFC<TCardList> = (props): JSX.Element => {
+const CardList: React.SFC<IEventList> = (props): JSX.Element => {
   const { events_list, hasmore } = props;
   const [params, setParams] = useState({
     limit: 6,
