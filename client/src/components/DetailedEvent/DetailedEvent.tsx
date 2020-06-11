@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IDetailedEvent } from '../../types';
-import { fetchEvent } from '../../api/event';
-import { useDispatch } from 'react-redux';
+import { Heading, Text, Paragraph } from 'evergreen-ui';
 
 /**
  * Подробное описание мероприятия.
@@ -16,8 +15,17 @@ const DetailedEvent: React.FC<IDetailedEvent> = (props): JSX.Element => {
     day: 'numeric',
     weekday: 'long'
   };
+
+  const addZero = (num: number): string => {
+    const str = num.toString();
+    return str.length === 1 ? '0' + str : str;
+  }
+    
+  const dateStart = new Date(start_time);
+  const dateEnd = new Date(end_time);
   
-  const day = new Date(start_time).toLocaleString("ru", dayOptions);
+  const day = dateStart.toLocaleString("ru", dayOptions);
+  const time = `${addZero(dateStart.getHours())}.${addZero(dateStart.getMinutes())} - ${addZero(dateEnd.getHours())}.${addZero(dateEnd.getMinutes())}`;
 
   return (
       <div className="detailed-event">
@@ -27,14 +35,19 @@ const DetailedEvent: React.FC<IDetailedEvent> = (props): JSX.Element => {
             src={photo}
           />
           <div className="detailed-event__short-description">
-            <h1>{ title }</h1>
-            <div>{day}</div>
-            <div>Режисер: {director}</div>
+            <Heading size={900} marginTop="default">{title}</Heading>
+            <Heading size={700} marginTop="default">{start_time && end_time && day}</Heading>
+            <Heading size={700} marginTop="default">{start_time && end_time && time}</Heading>
+            <Heading size={500} marginTop="default">{director && 'Режисер: '}{director}</Heading>
           </div>
         </div>
         <div className="detailed-event__description">
-          <div className="detailed-event__about">{description}</div>
-          <div className="detailed-event__actors">Актерский состав: {actors}</div>
+          <Paragraph marginTop="default">
+            {description}
+          </Paragraph>
+          <Paragraph marginTop="default">
+            {actors && 'Актерский состав: '}{actors}
+          </Paragraph>
         </div>
       </div>
   );

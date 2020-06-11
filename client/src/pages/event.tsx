@@ -32,6 +32,7 @@ const EventPage = (props : RouteComponentProps<RouterProps>) => {
                 actors={detailedEvent.actors}
             />
             <HallLayout
+                id={detailedEvent.id}
                 tickets={event.tickets}
             />
         </div>

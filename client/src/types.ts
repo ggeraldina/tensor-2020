@@ -40,3 +40,10 @@ export interface IDetailedEvent extends IEvent {
     director: string;
     actors: string;
 }
+
+/** Возвращаемый результат бронирования. */
+export interface IBookingResult {
+    id: number;
+    is_success: boolean;
+    message: string;
+}

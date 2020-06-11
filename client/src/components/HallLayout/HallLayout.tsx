@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { ITicket } from '../../types';
-import { fetchEvent } from '../../api/event';
-import { useDispatch } from 'react-redux';
 import HallSeat from '../HallSeat/HallSeat';
+import Booking from '../Booking/Booking';
 
 /**
  * Схема зала.
  */
 
-const HallLayout: React.FC<{ tickets: ITicket[]}> = ({ tickets }): JSX.Element => {
+const HallLayout: React.FC<{ id: string, tickets: ITicket[]}> = ({ id, tickets }): JSX.Element => {
     const blLayout: ITicket[][] = [];
     const initSelected: string[] = [];
     const [layout, setLayout] = useState(blLayout);
@@ -58,13 +57,13 @@ const HallLayout: React.FC<{ tickets: ITicket[]}> = ({ tickets }): JSX.Element =
     }
 
     return (
-        <div>
-            <div className="layout">
+        <div className="hall-layout">
+            <div className="hall-layout__seating">
                 {layout.map((row, rowIndex) => (
                     <div>
-                        <span>{rowIndex}</span>
+                        <span className="hall-layout__row-number">{rowIndex}</span>
                         {row.map((seat) => (
-                            <span onClick={(e) => clickSeat(seat)}>
+                            <span key={seat.id} onClick={(e) => clickSeat(seat)}>
                                 <HallSeat
                                     seat={seat}
                                     rowLength={row.length}
@@ -74,9 +73,12 @@ const HallLayout: React.FC<{ tickets: ITicket[]}> = ({ tickets }): JSX.Element =
                     </div>
                 ))}
             </div>
-            <div>
-                <span>Итого: {totalPrice} p.</span>
-                <button onClick={(e) => alert(11)}>Забронировать</button>
+            <div className="hall-layout__booking">
+                <Booking
+                    selected={selected}
+                    totalPrice={totalPrice}
+                    eventId={id}
+                />
             </div>
         </div>
     );
