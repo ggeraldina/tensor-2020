@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { TCardList } from '../../types';
 import { fetchInitialCardList } from '../../api/initialCardList';
+import { IEventList } from '../../types';
 import { fetchCardList } from '../../api/cardList';
 
-const initialState: TCardList = {
+const initialState: IEventList = {
   events_list: [],
   hasmore: false
 };

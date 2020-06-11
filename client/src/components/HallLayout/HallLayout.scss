@@ -1,0 +1,23 @@
+.hall-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 10px;
+    margin: 0 auto;
+
+    &__seating {
+        display: block;
+        width: 800px;
+        padding-bottom: 30px;
+    }
+
+    &__row-number {
+        width: 30px;
+        display: inline-block;
+        text-align: center;
+    }
+
+    &__booking {
+        display: block;
+    }
+}

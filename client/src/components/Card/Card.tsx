@@ -1,9 +1,9 @@
 import React from 'react';
-import { TCard } from '../../types';
+import { IEvent } from '../../types';
 import { Link } from 'react-router-dom';
 
-const Card: React.SFC<TCard> = (props): JSX.Element => {
-  const { photo, title, start_time} = props;
+const Card: React.SFC<IEvent> = (props): JSX.Element => {
+  const { photo, title, start_time, id} = props;
   let fullDate = new Date(start_time);
   const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
                   'июля', 'авгуса', 'сентября', 'октября', 'ноября', 'декабря'];
@@ -16,7 +16,7 @@ const Card: React.SFC<TCard> = (props): JSX.Element => {
         <span className="card__time">
           {`${fullDate.getDate()} ${months[fullDate.getMonth()]}, ${fullDate.getHours()}:${fullDate.getMinutes()}0`}
         </span>
-        <Link className="card__button" to="/">
+        <Link className="card__button" to={`event/${id}`}>
           Забронировать
         </Link>
       </div>
