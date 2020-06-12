@@ -4,7 +4,6 @@ from flask import jsonify, request
 from server import APP, MONGO
 from server.exception.error_data_db import ErrorDataDB
 
-# hasmore
 
 @APP.route("/api/<version>/get_events_list", methods=["GET"])
 def get_events_list(version):
