@@ -62,7 +62,7 @@ const HallLayout: React.FC<{ id: string, tickets: ITicket[]}> = ({ id, tickets }
         <div className="hall-layout">
             <div className="hall-layout__seating">
                 {layout.map((row, rowIndex) => (
-                    <div>
+                    <div key={rowIndex}>
                         <span className="hall-layout__row-number">{rowIndex}</span>
                         {row.map((seat) => (
                             <span key={seat.id} onClick={(e) => clickSeat(seat)}>

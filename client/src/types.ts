@@ -54,10 +54,12 @@ export interface IBooking {
     id: string;
     event: IEvent;
     tickets: ITicket[];
+    phone_number?: string;
 }
 
 /** Список бронирований */
 
 export interface IBookingList {
     bookings: IBooking[];
+    phone_number?: string;
 }

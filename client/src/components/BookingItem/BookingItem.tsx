@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IBooking } from '../../types';
-import { Button } from 'evergreen-ui';
+import { Button, Dialog, Pane, TextInputField, Text } from 'evergreen-ui';
+import { cancelBooking } from '../../api/cancelBooking';
 
-const BookingList: React.SFC<IBooking> = (props): JSX.Element => {
-  const { event, tickets } = props;
+const BookingItem: React.SFC<IBooking> = (props): JSX.Element => {
+  const { event, tickets, id, phone_number } = props;
+
+  const [errorPassword, setErrorPassword] = useState(true); 
+  const [isShown, setIsShown] = useState(false);
+  const [password, setPassword] = useState('');
+
 
   let fullDate = new Date(event.start_time);
   const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
                   'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+  /** Валидация для пароля. */
+  const validatePassword = (value: string): void => {
+      value.length < 8 ? setErrorPassword(true) : setErrorPassword(false);
+  };
+
+  const sendInfoForCancel = () => {
+    cancelBooking({
+        id: id, 
+        phone_number: phone_number,
+        password_to_cancel: password
+    }).then(result => {
+        if (result.is_success) {
+
+        } else {
+
+        }
+    })  
+  };
 
   return (
       <div className="booking-item">
@@ -27,10 +52,35 @@ const BookingList: React.SFC<IBooking> = (props): JSX.Element => {
                     </li>
                 ))}
             </ol>
-            <Button className="booking-item__button" type="button">Отменить бронирование</Button>
+            <Pane className="booking-item__modal">
+                <Dialog
+                    isShown={isShown}
+                    title="Введите номер телефона для отмены брони"
+                    onCloseComplete={() => setIsShown(false)}
+                    onConfirm={sendInfoForCancel}
+                    confirmLabel="Отменить бронь"
+                    cancelLabel="Отмена"
+                >
+                <Pane>
+                    <TextInputField
+                        isInvalid={errorPassword}
+                        validationMessage={errorPassword && 'Это поле обязательно для заполнения и должно содержать минимум 8 символов'}
+                        label=""
+                        placeholder="Например, день рождения бабушки"
+                        onChange={(e: { target: { value: string }}) => { 
+                            validatePassword(e.target.value);
+                            setPassword(e.target.value);
+                        }}
+                    />
+                </Pane>
+                </Dialog>
+                <Button onClick={() => setIsShown(true)}>
+                    Отменить бронирование
+                </Button>
+            </Pane>
         </div>
       </div>
   );
 };
 
-export default BookingList;
+export default BookingItem;

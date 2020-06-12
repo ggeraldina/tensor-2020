@@ -18,7 +18,7 @@ const SearchForm: React.SFC = (): JSX.Element => {
         row: 0,
         seat: 0,
         price: 0
-      }]
+      }],
     }
   ]);
   const [isEmpty, setIsEmpty] = useState(true);
@@ -51,7 +51,7 @@ const SearchForm: React.SFC = (): JSX.Element => {
             </form>
             <div className="search-form__result">
               {!isEmpty ? 
-                <BookingList bookings={result} />
+                <BookingList bookings={result} phone_number={phone}/>
               : <div className="search-form__empty">{ emptyResult }</div>}
             </div>
         </div>
