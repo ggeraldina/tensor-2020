@@ -49,14 +49,24 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
         }
     };
 
-    /** Валидация для номера телефона */
+    /** Валидация для номера телефона и сохранение значения в случае успеха. */
     const validatePhone = (value: string): void => {
-        value.length < 4 ? setErrorPhone(true) : setErrorPhone(false);
+        if (value.length < 4) {
+            setErrorPhone(true)
+        } else {
+            setErrorPhone(false);
+            setPhone(value);
+        }
     };
 
-    /** Валидация для пароля. */
+    /** Валидация для пароля и сохранение значения в случае успеха. */
     const validatePassword = (value: string): void => {
-        value.length < 8 ? setErrorPassword(true) : setErrorPassword(false);
+        if (value.length < 8) {
+            setErrorPassword(true)
+        } else {
+            setErrorPassword(false);
+            setPassword(value);
+        }
     }
 
     return (
@@ -106,13 +116,12 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
                 hasClose={false}>
                 <div>
                     <Text
-                        size={500}>
+                        size={600}>
                         Номер вашего бронирования: {bookingNumber.id}
                     </Text>
                 </div>
                 <div>
                     <Text
-                        color="#E4E7EB"
                         size={300}>
                         Сообщите номер бронирования в кассе театра, оплатите и получите Ваши билеты. Вы всегда можете отменить бронирование на нашем сайте в разделе "Бронирования".
                     </Text>
