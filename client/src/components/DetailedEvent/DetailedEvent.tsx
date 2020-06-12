@@ -1,6 +1,6 @@
 import React from 'react';
 import { IDetailedEvent } from '../../types';
-import { Heading, Text, Paragraph } from 'evergreen-ui';
+import { Heading, Paragraph } from 'evergreen-ui';
 
 /**
  * Подробное описание мероприятия.
@@ -33,6 +33,7 @@ const DetailedEvent: React.FC<IDetailedEvent> = (props): JSX.Element => {
           <img
             className="detailed-event__photo"
             src={photo}
+            alt='Изображение'
           />
           <div className="detailed-event__short-description">
             <Heading size={900} marginTop="default">{title}</Heading>

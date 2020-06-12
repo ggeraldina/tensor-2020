@@ -5,7 +5,7 @@ export interface TExample {
 /** Мероприятие с краткой информацией. */
 export interface IEvent {
     id: string;
-    photo: string;
+    photo?: string;
     title: string;
     start_time: string;
 }
@@ -22,8 +22,8 @@ export interface ITicket {
     row: number;
     seat: number;
     price: number;
-    color_zone: string;
-    is_booked: boolean;
+    color_zone?: string;
+    is_booked?: boolean;
     selected?: boolean;
 };
 
@@ -46,4 +46,21 @@ export interface IBookingResult {
     id: number;
     is_success: boolean;
     message: string;
+}
+
+/** Бронирование */
+
+export interface IBooking {
+    id: string;
+    event: IEvent;
+    tickets: ITicket[];
+    phone_number?: string;
+    findDeletedItem?: (value: string) => void;
+}
+
+/** Список бронирований */
+
+export interface IBookingList {
+    bookings: IBooking[];
+    phone_number?: string;
 }
