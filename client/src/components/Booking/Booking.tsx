@@ -39,7 +39,10 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
                 setBookingError(true);
             }
             setBooking({ isShown: false });
-        });   
+        })
+        .catch((error) => {
+            setBookingError(true);
+        })
     };
 
     return (
