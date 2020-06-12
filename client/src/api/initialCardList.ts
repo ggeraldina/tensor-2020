@@ -9,7 +9,7 @@ export const fetchInitialCardList = createAsyncThunk(
   async () => {
     const response = await axios({
       method: 'GET',
-      url: `https://tensor-2020-test.herokuapp.com/api/v1/get_events_list`,
+      url: `${baseUrl}/api/v1/get_events_list`,
       params: {
         limit: 6,
         offset: 0

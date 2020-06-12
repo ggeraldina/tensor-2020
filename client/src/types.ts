@@ -55,6 +55,7 @@ export interface IBooking {
     event: IEvent;
     tickets: ITicket[];
     phone_number?: string;
+    findDeletedItem?: (value: string) => void;
 }
 
 /** Список бронирований */

@@ -6,7 +6,8 @@
         margin: 0 0 20px;
     }
 
-    &__result {
-        padding: 20px 0 0;
+    &__form {
+        display: flex;
+        align-items: flex-start;
     }
 }
