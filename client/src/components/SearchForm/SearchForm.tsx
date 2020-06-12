@@ -48,7 +48,7 @@ const SearchForm: React.SFC = (): JSX.Element => {
         setErrorPhone(false);
         setPhone(value);
     }
-};
+  };
 
   return (
     <div className="search-form">
