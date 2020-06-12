@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { TCardList } from '../types';
+import { IEventList } from '../types';
 
 export const fetchInitialCardList = createAsyncThunk(
   'initialCardList/fetch',
@@ -13,6 +13,6 @@ export const fetchInitialCardList = createAsyncThunk(
         offset: 0
       }
     });
-    return response.data as TCardList;
+    return response.data as IEventList;
   }
 );
