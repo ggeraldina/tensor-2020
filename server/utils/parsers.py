@@ -20,10 +20,12 @@ def parse_phone_number(str_phone_number):
                 type(str_phone_number)
             )
         )
-    if len(str_phone_number) < 4:
+    min_len = 4
+    if len(str_phone_number) < min_len:
         raise ErrorDataDB(
-            ("Очень короткий номер телефона: {}. Хотя бы 4 цифры").format(
-                str_phone_number
+            ("Очень короткий номер телефона: {}. Хотя бы {} цифры").format(
+                str_phone_number,
+                min_len
             )
         )
     if not str_phone_number.isdigit():

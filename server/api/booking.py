@@ -57,10 +57,12 @@ def check_password_to_cancel(str_password_to_cancel):
                 type(str_password_to_cancel)
             )
         )
-    if len(str_password_to_cancel) < 9:
+    min_len = 8
+    if len(str_password_to_cancel) < min_len:
         raise ErrorDataDB(
-            ("Очень короткий password_to_cancel: {}. Хотя бы 8 символов").format(
-                str_password_to_cancel
+            ("Очень короткий password_to_cancel: {}. Хотя бы {} символов").format(
+                str_password_to_cancel,
+                min_len
             )
         )
     return True
