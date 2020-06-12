@@ -1,0 +1,12 @@
+.search-form {
+    padding: 45px 0;
+    min-height: calc(100vh - 234px);
+
+    &__title {
+        margin: 0 0 20px;
+    }
+
+    &__result {
+        padding: 20px 0 0;
+    }
+}

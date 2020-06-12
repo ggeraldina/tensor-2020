@@ -7,7 +7,7 @@ import { event } from './event/event';
 export const rootReducer = combineReducers({
   example,
   cardList,
-  event
+  event,
 });
 
 export const initializeStore = (preloadedState = {}) =>

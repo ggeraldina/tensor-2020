@@ -1,11 +1,12 @@
 import React from 'react';
+import SearchForm from '../components/SearchForm/SearchForm';
+import { cancelBooking } from '../api/cancelBooking';
+import { useSelector } from '../helpers/useTypedSelector';
+import { useDispatch } from 'react-redux';
  
 const Reservation = () => {
     return (
-       <div>
-          <h1>About US</h1>
-          <p>About US page body content</p>
-       </div>
+       <SearchForm />
     );
 }
  

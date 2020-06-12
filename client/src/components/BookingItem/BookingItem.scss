@@ -1,0 +1,35 @@
+.booking-item {
+    width: 465px;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+    &__title {
+        margin: 0;
+        padding: 0 0 10px;
+        border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__tickets {
+        margin: 0 0 10px;
+    }
+
+    &__date {
+        display: block;
+        margin: 10px 0;
+    }
+
+    &__info {
+        margin: 0 10px 0 0;
+    }
+
+    &__button {
+        width: fit-content;
+        align-self: flex-end;
+    }
+}

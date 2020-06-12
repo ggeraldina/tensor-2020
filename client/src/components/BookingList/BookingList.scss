@@ -1,0 +1,14 @@
+.booking-list {
+    &__list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__item {
+        margin: 0 0 30px;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+}
