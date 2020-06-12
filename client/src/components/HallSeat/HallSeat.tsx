@@ -12,7 +12,7 @@ const HallSeat: React.FC<{ seat: ITicket, rowLength: number }> = ({ seat, rowLen
             className="seat"
             marginRight={!(seat.seat - 4) || (seat.seat + 4 === rowLength - 1) ? '40px' : '4px'}
             backgroundColor={seat.is_booked ? '#E4E7EB' : seat.color_zone}
-            backgroundImage={seat.selected ? 'linear-gradient(to bottom, #FAFBFB, #EAECEE)' : ''}
+            backgroundImage={seat.selected ? 'linear-gradient(to bottom, #899898, #778888)' : ''}
             boxShadow="0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)"
         >
             <Tooltip content={seat.is_booked ? 'Место уже забронировано' : seat.price.toString()}>

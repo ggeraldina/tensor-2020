@@ -9,7 +9,7 @@ export const fetchBooking =
       url: `${baseUrl}/api/v1/add_booking`,
       headers: { 'content-type': 'application/json' },
       data: JSON.stringify({
-        phone_number: +params.phone_number,
+        phone_number: params.phone_number,
         password_to_cancel: params.password_to_cancel,
         event: params.event,
         tickets: params.tickets

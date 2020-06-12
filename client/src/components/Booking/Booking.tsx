@@ -16,6 +16,8 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
     const [booking, setBooking] = useState(initBooking);
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+    const [errorPhone, setErrorPhone] = useState(true);
+    const [errorPassword, setErrorPassword] = useState(true); 
     const [bookingError, setBookingError] = useState(false);
     const [bookingNumber, setBookingNumber] = useState({ isShown: false, id: 0 });
     const [redirect, setRedirect] = useState(false);
@@ -31,19 +33,31 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
 
     /** Отправляем запрос бронирования выбранных мест и обрабатываем результат. */
     const sendBooking = () => {
-        fetchBooking({phone_number: phone, password_to_cancel: password, event: eventId, tickets: tickets})
-        .then((result: IBookingResult) => {
-            if (result.is_success) {
-                setBookingNumber({ isShown: true, id: result.id });
-            } else {
+        if (!errorPassword && !errorPhone) {
+            fetchBooking({phone_number: phone, password_to_cancel: password, event: eventId, tickets: tickets})
+            .then((result: IBookingResult) => {
+                if (result.is_success) {
+                    setBookingNumber({ isShown: true, id: result.id });
+                } else {
+                    setBookingError(true);
+                }
+                setBooking({ isShown: false });
+            })
+            .catch((error) => {
                 setBookingError(true);
-            }
-            setBooking({ isShown: false });
-        })
-        .catch((error) => {
-            setBookingError(true);
-        })
+            })
+        }
     };
+
+    /** Валидация для номера телефона */
+    const validatePhone = (value: string): void => {
+        value.length < 4 ? setErrorPhone(true) : setErrorPhone(false);
+    };
+
+    /** Валидация для пароля. */
+    const validatePassword = (value: string): void => {
+        value.length < 8 ? setErrorPassword(true) : setErrorPassword(false);
+    }
 
     return (
         <Pane>
@@ -56,16 +70,19 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
                 cancelLabel="Отмена">
                 <Pane>
                     <TextInputField
+                        isInvalid={errorPhone}
+                        validationMessage={errorPhone && 'Это поле обязательно для заполнения и должно содержать минимум 4 цифры'}
                         label="Номер телефона"
-                        required
-                        placeholder="8 999 999 99 99"
-                        onChange={(e: { target: { value: string }}) => setPhone(e.target.value)}
+                        type="number"
+                        placeholder="89099999999"
+                        onChange={(e: { target: { value: string }}) => validatePhone(e.target.value)}
                     />
                     <TextInputField
+                        isInvalid={errorPassword}
+                        validationMessage={errorPassword && 'Это поле обязательно для заполнения и должно содержать минимум 8 символов'}
                         label="Пароль для отмены бронирования"
-                        required
                         placeholder="Например, день рождения бабушки"
-                        onChange={(e: { target: { value: string }}) => setPassword(e.target.value)}
+                        onChange={(e: { target: { value: string }}) => validatePassword(e.target.value)}
                     />
                 </Pane>
             </Dialog>
@@ -74,6 +91,7 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
                 title="Извините, не удалось подтвердить бронирование :("
                 onConfirm={() => setBookingError(false)}
                 confirmLabel="OK"
+                intent="danger"
                 hasCancel={false}
                 hasClose={false}>
                 Попробуйте позже
@@ -83,6 +101,7 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
                 title="Ваше бонирование подтверждено!"
                 onConfirm={() => setRedirect(true)}
                 confirmLabel="OK"
+                intent="success"
                 hasCancel={false}
                 hasClose={false}>
                 <div>
