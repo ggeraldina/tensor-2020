@@ -11,7 +11,7 @@ export const fetchBooking =
     });
     const response = await axios({
       method: 'POST',
-      url: `https://tensor-2020.herokuapp.com/api/v1/add_booking`,
+      url: `/api/v1/add_booking`,
       params: data
     });
     return response.data as IBookingResult;

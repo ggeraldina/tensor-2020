@@ -7,7 +7,7 @@ export const fetchCardList = createAsyncThunk(
   async (params: {limit: number, offset: number}) => {
     const response = await axios({
       method: 'GET',
-      url: `https://tensor-2020.herokuapp.com/api/v1/get_events_list`,
+      url: `/api/v1/get_events_list`,
       params: {
         limit: params.limit,
         offset: params.offset

@@ -6,7 +6,7 @@ const Card: React.SFC<IEvent> = (props): JSX.Element => {
   const { photo, title, start_time, id} = props;
   let fullDate = new Date(start_time);
   const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 
-                  'июля', 'авгуса', 'сентября', 'октября', 'ноября', 'декабря'];
+                  'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 
   return (
     <div className="card">
