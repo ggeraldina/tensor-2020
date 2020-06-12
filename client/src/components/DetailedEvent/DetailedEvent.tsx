@@ -39,7 +39,7 @@ const DetailedEvent: React.FC<IDetailedEvent> = (props): JSX.Element => {
             <Heading size={900} marginTop="default">{title}</Heading>
             <Heading size={700} marginTop="default">{start_time && end_time && day}</Heading>
             <Heading size={700} marginTop="default">{start_time && end_time && time}</Heading>
-            <Heading size={500} marginTop="default">{director && 'Режисер: '}{director}</Heading>
+            <Heading size={500} marginTop="default">{director && 'Режиссер: '}{director}</Heading>
           </div>
         </div>
         <div className="detailed-event__description">

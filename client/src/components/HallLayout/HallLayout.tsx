@@ -30,30 +30,32 @@ const HallLayout: React.FC<{ id: string, tickets: ITicket[]}> = ({ id, tickets }
      * Снимаем/ставим выделение. Отслеживаем все выбранные места. Считаем итоговую стоимость билетов.
      */
     const clickSeat = (seat: ITicket): void => {
-        const inSelected: string | undefined = selected.find((item) => item === seat.id);
-        const curLayout: ITicket[][] = layout.slice();
-        const curSelected: string[] = selected.slice();
-        let curTotalPrice: number = totalPrice;
+        if (!seat.is_booked) {
+            const inSelected: string | undefined = selected.find((item) => item === seat.id);
+            const curLayout: ITicket[][] = layout.slice();
+            const curSelected: string[] = selected.slice();
+            let curTotalPrice: number = totalPrice;
 
-        if (inSelected) {
-            const index: number = curSelected.findIndex((item) => item === inSelected);
-            curSelected.splice(index, 1);
-            curLayout[seat.row][seat.seat] = {
-                ...curLayout[seat.row][seat.seat],
-                selected: false       
-            };
-            curTotalPrice -= seat.price;
-        } else {
-            curSelected.push(seat.id);
-            curLayout[seat.row][seat.seat] = {
-                ...curLayout[seat.row][seat.seat],
-                selected: true       
-            };
-            curTotalPrice += seat.price;
+            if (inSelected) {
+                const index: number = curSelected.findIndex((item) => item === inSelected);
+                curSelected.splice(index, 1);
+                curLayout[seat.row][seat.seat] = {
+                    ...curLayout[seat.row][seat.seat],
+                    selected: false       
+                };
+                curTotalPrice -= seat.price;
+            } else {
+                curSelected.push(seat.id);
+                curLayout[seat.row][seat.seat] = {
+                    ...curLayout[seat.row][seat.seat],
+                    selected: true       
+                };
+                curTotalPrice += seat.price;
+            }
+            setLayout(curLayout);
+            setSelected(curSelected);
+            setTotalPrice(curTotalPrice);
         }
-        setLayout(curLayout);
-        setSelected(curSelected);
-        setTotalPrice(curTotalPrice);
     }
 
     return (
