@@ -42,10 +42,28 @@ def check_request_dict(data):
 @run_transaction_with_retry
 def txn_add_booking(session, data):
     """ Добавить бронь и информацию о ней в билеты """
+    check_password_to_cancel(data["password_to_cancel"])
     book_tickets = add_booking_in_tickets(data, session)
     booking_id = add_doc_booking(data, book_tickets, session)
     commit_with_retry(session)
     return booking_id
+
+
+def check_password_to_cancel(str_password_to_cancel):
+    """ Проверить пароль на надежность """
+    if not isinstance(str_password_to_cancel, str):
+        raise ErrorDataDB(
+            ("Переданный password_to_cancel должен иметь строковый тип данных. Передан {}").format(
+                type(str_password_to_cancel)
+            )
+        )
+    if len(str_password_to_cancel) < 9:
+        raise ErrorDataDB(
+            ("Очень короткий password_to_cancel: {}. Хотя бы 8 символов").format(
+                str_password_to_cancel
+            )
+        )
+    return True
 
 
 def add_booking_in_tickets(data, session):
