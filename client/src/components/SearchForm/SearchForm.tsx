@@ -26,8 +26,8 @@ const SearchForm: React.SFC = (): JSX.Element => {
   const [emptyResult, setEmptyResult] = useState('Список пуст');
 
   const searchBooking = (e: SyntheticEvent) => {
+    e.preventDefault();
     if (!errorPhone) {
-      e.preventDefault();
       fetchBooking({phone_number: +phone}).then((result) => {
         if (result.bookings.length) {
           setResult(result.bookings);
