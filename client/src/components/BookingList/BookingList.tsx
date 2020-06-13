@@ -13,11 +13,13 @@ const BookingList: React.SFC<IBookingList> = (props): JSX.Element => {
 
   useEffect(() => { 
     const newList = bookings.filter((item) => item.id !== id);
+
     bookings.map((booking, index) => {
       if (id === booking.id) {
         bookings.splice(index, 1);
       }
     })
+    
     setList(newList);
   }, [id])
 

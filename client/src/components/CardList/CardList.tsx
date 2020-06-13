@@ -55,13 +55,6 @@ const CardList: React.SFC<IEventList> = (props): JSX.Element => {
             >
                 <Placeholders />
             </Fade>
-            
-            {/* {events_list.map(card => (
-                <li className="card-list__item" key={card.id}>
-                    <Card id={card.id} title={card.title}
-                          photo={card.photo} start_time={card.start_time}/>
-                </li>
-            ))} */}
         </div>
         {hasmore && (
             <button className="card-list__more" type="button" onClick={getMoreCards}>

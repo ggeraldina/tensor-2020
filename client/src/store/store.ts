@@ -1,11 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { example } from './example/example';
 import { cardList } from './cardList/cardList';
 import { event } from './event/event';
 
 export const rootReducer = combineReducers({
-  example,
   cardList,
   event,
 });
