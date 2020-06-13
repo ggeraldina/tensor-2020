@@ -33,6 +33,7 @@ export const cardList = createReducer(initialState, builder =>
       state.events_list.push(...payload.events_list);
       state.hasmore = payload.hasmore;
       state.placeholders = payload.events_list.length;
+      state.isLoading = false;
       return state;
     })
     .addCase(fetchCardList.pending, (state) => {
