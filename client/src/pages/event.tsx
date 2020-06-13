@@ -22,26 +22,20 @@ const EventPage = (props : RouteComponentProps<RouterProps>) => {
 
     return (
         <div className="main container">
-            {event.isLoading ? 
-                <Spinner className="spinner" />
-            :
-                <>
-                <DetailedEvent
-                    id={detailedEvent.id}
-                    title={detailedEvent.title}
-                    photo={detailedEvent.photo}
-                    start_time={detailedEvent.start_time}
-                    end_time={detailedEvent.end_time}
-                    description={detailedEvent.description}
-                    director={detailedEvent.director}
-                    actors={detailedEvent.actors}
-                />
-                <HallLayout
-                    id={detailedEvent.id}
-                    tickets={event.tickets}
-                />
-                </>
-            }
+            <DetailedEvent
+                id={detailedEvent.id}
+                title={detailedEvent.title}
+                photo={detailedEvent.photo}
+                start_time={detailedEvent.start_time}
+                end_time={detailedEvent.end_time}
+                description={detailedEvent.description}
+                director={detailedEvent.director}
+                actors={detailedEvent.actors}
+            />
+            <HallLayout
+                id={detailedEvent.id}
+                tickets={event.tickets}
+            />
         </div>
     );
 }

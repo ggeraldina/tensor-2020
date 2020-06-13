@@ -21,7 +21,7 @@ const initialState: IEventTickets = {
 export const event = createReducer(initialState, builder =>
   builder
     .addCase(fetchEvent.fulfilled, (state, { payload }) => {
-      state.tickets.push(...payload.tickets);
+      state.tickets = payload.tickets;
       state.event = payload.event;
       state.isLoaded = true;
       state.isLoading = false;
