@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import DetailedEvent from '../components/DetailedEvent/DetailedEvent';
 import HallLayout from '../components/HallLayout/HallLayout';
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Spinner } from 'evergreen-ui';
 
 interface RouterProps {
     id: string;

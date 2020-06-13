@@ -11,7 +11,6 @@ const CardList: React.SFC<IEventList> = (props): JSX.Element => {
     limit: 6,
     offset: 6,
   });
-  console.log(isLoading);
 
   const dispatch = useDispatch();
 

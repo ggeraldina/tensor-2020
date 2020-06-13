@@ -51,7 +51,9 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
 
     /** Валидация для номера телефона и сохранение значения в случае успеха. */
     const validatePhone = (value: string): void => {
-        if (value.length < 4) {
+        const regExp = /^\d+$/;
+
+        if (value.length < 4 || !regExp.test(value)) {
             setErrorPhone(true)
         } else {
             setErrorPhone(false);

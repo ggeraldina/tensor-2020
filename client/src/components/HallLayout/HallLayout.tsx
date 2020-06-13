@@ -23,6 +23,7 @@ const HallLayout: React.FC<{ id: string, tickets: ITicket[]}> = ({ id, tickets }
             blLayout[ticket.row][ticket.seat] = ticket;
         });
         setLayout(blLayout);
+        console.log('fdfdf');
     }, [tickets]);
 
     /**
