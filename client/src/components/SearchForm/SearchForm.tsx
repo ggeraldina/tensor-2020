@@ -42,9 +42,7 @@ const SearchForm: React.SFC = (): JSX.Element => {
   
   /** Валидация для номера телефона и сохранение значения в случае успеха. */
   const validatePhone = (value: string): void => {
-    const regExp = /^\d+$/;
-    
-    if (value.length < 4 || !regExp.test(value)) {
+    if (value.length < 4) {
         setErrorPhone(true)
     } else {
         setErrorPhone(false);
@@ -61,6 +59,7 @@ const SearchForm: React.SFC = (): JSX.Element => {
                   placeholder="8 999 999 99 99" 
                   label=""
                   inputHeight={40}
+                  type="number"
                   validationMessage={errorPhone && 'Это поле обязательно для заполнения и должно содержать минимум 4 цифры'}
                   onChange={(e: { target: { value: string }}) => {
                     setPhone(e.target.value);
