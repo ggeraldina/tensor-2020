@@ -14,6 +14,9 @@ export interface IEvent {
 export interface IEventList {
     events_list: IEvent[];
     hasmore: boolean;
+    isLoading?: boolean;
+    isLoaded?: boolean;
+    placeholders?: number;
 };
 
 /** Билет. */
@@ -31,6 +34,8 @@ export interface ITicket {
 export interface IEventTickets {
     event: IDetailedEvent;
     tickets: ITicket[];
+    isLoading?: boolean;
+    isLoaded?: boolean;
 };
 
 /** Мероприятие с подробной информацией. */

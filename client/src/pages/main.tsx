@@ -14,7 +14,11 @@ const Main = () => {
 
     return (
        <div className="main">
-          <CardList events_list={cardList.events_list} hasmore={cardList.hasmore} />
+          <CardList 
+            events_list={cardList.events_list} 
+            hasmore={cardList.hasmore} 
+            isLoading={cardList.isLoading} 
+            placeholders={cardList.placeholders}/>
        </div>
     );
 }

@@ -13,7 +13,9 @@ const initialState: IEventTickets = {
       director: '',
       actors: ''
     },
-    tickets: []
+    tickets: [],
+    isLoading: false,
+    isLoaded: false,
 };
 
 export const event = createReducer(initialState, builder =>
@@ -21,6 +23,14 @@ export const event = createReducer(initialState, builder =>
     .addCase(fetchEvent.fulfilled, (state, { payload }) => {
       state.tickets.push(...payload.tickets);
       state.event = payload.event;
+      state.isLoaded = true;
+      state.isLoading = false;
       return state;
+    })
+    .addCase(fetchEvent.pending, (state) => {
+      state.isLoading = true;
+    })
+    .addCase(fetchEvent.rejected, (state) => {
+      state.isLoading = false;
     })
 );
