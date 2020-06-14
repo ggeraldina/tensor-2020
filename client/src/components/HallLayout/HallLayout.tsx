@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ITicket } from '../../types';
 import HallSeat from '../HallSeat/HallSeat';
 import Booking from '../Booking/Booking';
+import { Spinner } from 'evergreen-ui';
 
 /**
  * Схема зала.
- */
+*/
 
 const HallLayout: React.FC<{ id: string, tickets: ITicket[]}> = ({ id, tickets }): JSX.Element => {
     const blLayout: ITicket[][] = [];
@@ -60,8 +61,10 @@ const HallLayout: React.FC<{ id: string, tickets: ITicket[]}> = ({ id, tickets }
 
     return (
         <div className="hall-layout">
-            <div className="hall-layout__seating">
-                {layout.map((row, rowIndex) => (
+            {layout.length > 0 ?
+            <>
+                <div className="hall-layout__seating">
+                    {layout.map((row, rowIndex) => (
                     <div key={rowIndex}>
                         <span className="hall-layout__row-number">{rowIndex}</span>
                         {row.map((seat) => (
@@ -73,15 +76,18 @@ const HallLayout: React.FC<{ id: string, tickets: ITicket[]}> = ({ id, tickets }
                             </span>
                         ))}
                     </div>
-                ))}
-            </div>
-            <div className="hall-layout__booking">
-                <Booking
-                    selected={selected}
-                    totalPrice={totalPrice}
-                    eventId={id}
-                />
-            </div>
+                    ))}
+                </div>
+                <div className="hall-layout__booking">
+                    <Booking
+                        selected={selected}
+                        totalPrice={totalPrice}
+                        eventId={id}
+                    />
+                </div>
+            </>
+            : <Spinner />
+            }
         </div>
     );
 };
