@@ -65,7 +65,7 @@ const BookingItem: React.SFC<IBooking> = (props): JSX.Element => {
             <Pane className="booking-item__modal">
                 <Dialog
                     isShown={isShown}
-                    title="Введите номер телефона для отмены брони"
+                    title="Введите пароль для отмены брони"
                     onCloseComplete={() => setIsShown(false)}
                     onConfirm={sendInfoForCancel}
                     confirmLabel="Отменить бронь"

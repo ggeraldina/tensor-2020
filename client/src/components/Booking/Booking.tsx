@@ -86,7 +86,9 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
                         validationMessage={errorPhone && 'Это поле обязательно для заполнения и должно содержать минимум 4 цифры'}
                         label="Номер телефона"
                         placeholder="89099999999"
+                        type="number"
                         onChange={(e: { target: { value: string }}) => validatePhone(e.target.value)}
+                        className="input-number"
                     />
                     <TextInputField
                         isInvalid={errorPassword}
