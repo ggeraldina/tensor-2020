@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, createAction } from '@reduxjs/toolkit';
 import { IEventTickets } from '../../types';
 import { fetchEvent } from '../../api/event';
 
@@ -18,8 +18,14 @@ const initialState: IEventTickets = {
     isLoaded: false,
 };
 
+const init = createAction('init');
+
 export const event = createReducer(initialState, builder =>
   builder
+    .addCase(init, (state) => {
+        state.event = initialState.event;
+        state.tickets = initialState.tickets;
+    })
     .addCase(fetchEvent.fulfilled, (state, { payload }) => {
       state.tickets = payload.tickets;
       state.event = payload.event;
@@ -34,3 +40,5 @@ export const event = createReducer(initialState, builder =>
       state.isLoading = false;
     })
 );
+
+export default init;
