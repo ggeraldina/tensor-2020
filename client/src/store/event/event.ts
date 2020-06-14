@@ -23,8 +23,8 @@ const init = createAction('init');
 export const event = createReducer(initialState, builder =>
   builder
     .addCase(init, (state) => {
-      state.event = initialState.event;
-      state.tickets = initialState.tickets;
+        state.event = initialState.event;
+        state.tickets = initialState.tickets;
     })
     .addCase(fetchEvent.fulfilled, (state, { payload }) => {
       state.tickets = payload.tickets;

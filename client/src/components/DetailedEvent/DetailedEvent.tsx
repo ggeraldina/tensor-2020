@@ -44,7 +44,7 @@ const DetailedEvent: React.FC<IDetailedEvent> = (props): JSX.Element => {
         </div>
         <div className="detailed-event__description">
           <Paragraph marginTop="default">
-          <div dangerouslySetInnerHTML={{ __html: description }} />
+            <p dangerouslySetInnerHTML={{ __html: description }} />
           </Paragraph>
           <Paragraph marginTop="default">
             {actors && 'Актерский состав: '}{actors}

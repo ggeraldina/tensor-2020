@@ -11,7 +11,7 @@ interface RouterProps {
 }
 
 const EventPage = (props : RouteComponentProps<RouterProps>) => {
-    let event = useSelector(state => state.event);
+    const event = useSelector(state => state.event);
     const detailedEvent = event.event;
     const dispatch = useDispatch();
 

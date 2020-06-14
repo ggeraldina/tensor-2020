@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import { fetchInitialCardList } from '../api/initialCardList';
 import { useSelector } from '../helpers/useTypedSelector';
 import { useDispatch } from 'react-redux';
+import init from '../store/event/event';
 import CardList from '../components/CardList/CardList';
  
 const Main = () => {
@@ -10,6 +11,7 @@ const Main = () => {
 
     useEffect(() => {
         dispatch(fetchInitialCardList());
+        dispatch(init());
     }, [dispatch]);
 
     return (
