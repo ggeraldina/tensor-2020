@@ -30,11 +30,13 @@ const DetailedEvent: React.FC<IDetailedEvent> = (props): JSX.Element => {
   return (
       <div className="detailed-event">
         <div className="detailed-event__preview">
-          <img
+          {photo &&
+            <img
             className="detailed-event__photo"
             src={photo}
             alt='Изображение'
-          />
+            />
+          }
           <div className="detailed-event__short-description">
             <Heading size={900} marginTop="default">{title}</Heading>
             <Heading size={700} marginTop="default">{start_time && end_time && day}</Heading>
