@@ -25,9 +25,9 @@ export interface ITicket {
     row: number;
     seat: number;
     price: number;
-    color_zone?: string;
-    is_booked?: boolean;
-    selected?: boolean;
+    color_zone: string;
+    is_booked: boolean;
+    selected: boolean;
 };
 
 /** Мероприятие с подробной информацией и с билетами на него. */
@@ -53,12 +53,20 @@ export interface IBookingResult {
     message: string;
 }
 
+/** Билет. */
+export interface IBookingItem {
+    id: string;
+    row: number;
+    seat: number;
+    price: number;
+};
+
 /** Бронирование */
 
 export interface IBooking {
     id: string;
     event: IEvent;
-    tickets: ITicket[];
+    tickets: IBookingItem[];
     phone_number?: string;
     findDeletedItem?: (value: string) => void;
 }

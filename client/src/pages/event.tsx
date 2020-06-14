@@ -5,21 +5,20 @@ import { useDispatch } from 'react-redux';
 import DetailedEvent from '../components/DetailedEvent/DetailedEvent';
 import HallLayout from '../components/HallLayout/HallLayout';
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import { Spinner } from 'evergreen-ui';
 
 interface RouterProps {
     id: string;
 }
- 
+
 const EventPage = (props : RouteComponentProps<RouterProps>) => {
-    const event = useSelector(state => state.event);
+    let event = useSelector(state => state.event);
     const detailedEvent = event.event;
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchEvent({id: props.match.params.id}));
-    }, [dispatch]);
-
+    }, []);
+    
     return (
         <div className="main container">
             <DetailedEvent
@@ -39,5 +38,5 @@ const EventPage = (props : RouteComponentProps<RouterProps>) => {
         </div>
     );
 }
- 
+
 export default withRouter(EventPage);
