@@ -6,6 +6,8 @@ from server.exception.error_data_db import ErrorDataDB
 
 def parse_object_id(str_id):
     """ Преобразовать id в ObjectId """
+    if str_id is None:
+        raise ErrorDataDB("Не передан id")
     try:
         return ObjectId(str_id)
     except errors.InvalidId:
@@ -14,6 +16,8 @@ def parse_object_id(str_id):
 
 def parse_phone_number(str_phone_number):
     """ Преобразовать номер телефона в int """
+    if str_phone_number is None:
+        raise ErrorDataDB("Не передан phone_number")
     if not isinstance(str_phone_number, str):
         raise ErrorDataDB(
             ("Переданный phone_number должен иметь строковый тип данных. Передан {}").format(
