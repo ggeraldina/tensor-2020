@@ -31,16 +31,18 @@ const Card: React.SFC<IEvent> = (props): JSX.Element => {
 
   return (
     <div className="card">
-      <img className="card__image" src={photo} alt="Спектакль"/>
-      <div className="card__description">
-        <h2 className="card__title">{title}</h2>
-        <span className="card__time">
-          {`${fullDate.getDate()} ${months[fullDate.getMonth()]} ${fullDate.getFullYear()} г. ${fullDate.getHours()}:${fullDate.getMinutes()}0`}
-        </span>
-        <Link className="card__button" to={`event/${id}`}>
-          Забронировать
-        </Link>
+      <div className="card__wrapper">
+        <img className="card__image" src={photo} alt="Спектакль"/>
+        <div className="card__description">
+          <h2 className="card__title">{title}</h2>
+          <span className="card__time">
+            {`${fullDate.getDate()} ${months[fullDate.getMonth()]} ${fullDate.getFullYear()} г. ${fullDate.getHours()}:${fullDate.getMinutes()}0`}
+          </span>
+        </div>
       </div>
+      <Link className="card__button" to={`event/${id}`}>
+        Забронировать
+      </Link>
     </div>
   );
 };

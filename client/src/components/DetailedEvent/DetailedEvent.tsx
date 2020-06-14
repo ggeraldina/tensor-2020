@@ -25,7 +25,7 @@ const DetailedEvent: React.FC<IDetailedEvent> = (props): JSX.Element => {
   const dateEnd = new Date(end_time);
   
   const day = dateStart.toLocaleString("ru", dayOptions);
-  const time = `${addZero(dateStart.getHours())}.${addZero(dateStart.getMinutes())} - ${addZero(dateEnd.getHours())}.${addZero(dateEnd.getMinutes())}`;
+  const time = `${addZero(dateStart.getHours())}:${addZero(dateStart.getMinutes())} - ${addZero(dateEnd.getHours())}:${addZero(dateEnd.getMinutes())}`;
 
   return (
       <div className="detailed-event">
@@ -44,7 +44,7 @@ const DetailedEvent: React.FC<IDetailedEvent> = (props): JSX.Element => {
         </div>
         <div className="detailed-event__description">
           <Paragraph marginTop="default">
-            {description}
+          <div dangerouslySetInnerHTML={{ __html: description }} />
           </Paragraph>
           <Paragraph marginTop="default">
             {actors && 'Актерский состав: '}{actors}
