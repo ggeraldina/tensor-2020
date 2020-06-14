@@ -49,7 +49,7 @@ const BookingItem: React.SFC<IBooking> = (props): JSX.Element => {
         <h2 className="booking-item__title">Спектакль: "{ event.title }"</h2>
         <div className="booking-item__wrapper">
             <span className="booking-item__date">
-                <strong>Дата:</strong> {`${fullDate.getDate()} ${months[fullDate.getMonth()]}`} <br/>
+                <strong>Дата:</strong> {`${fullDate.getDate()} ${months[fullDate.getMonth()]} ${fullDate.getFullYear()} г.`} <br/>
                 <strong>Время начала:</strong> {`${fullDate.getHours()}:${fullDate.getMinutes()}0`}
             </span>
             <span className="booking-item__tickets-title"><strong>Билеты</strong></span>

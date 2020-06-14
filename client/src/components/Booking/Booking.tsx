@@ -51,7 +51,9 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
 
     /** Валидация для номера телефона и сохранение значения в случае успеха. */
     const validatePhone = (value: string): void => {
-        if (value.length < 4) {
+        const regExp = /^\d+$/;
+
+        if (value.length < 4 || !value.match(regExp)) {
             setErrorPhone(true)
         } else {
             setErrorPhone(false);
@@ -83,7 +85,6 @@ const Booking: React.FC<{ eventId: string, selected: string[], totalPrice: numbe
                         isInvalid={errorPhone}
                         validationMessage={errorPhone && 'Это поле обязательно для заполнения и должно содержать минимум 4 цифры'}
                         label="Номер телефона"
-                        type="number"
                         placeholder="89099999999"
                         onChange={(e: { target: { value: string }}) => validatePhone(e.target.value)}
                     />

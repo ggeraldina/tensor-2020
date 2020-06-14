@@ -35,7 +35,7 @@ const Card: React.SFC<IEvent> = (props): JSX.Element => {
       <div className="card__description">
         <h2 className="card__title">{title}</h2>
         <span className="card__time">
-          {`${fullDate.getDate()} ${months[fullDate.getMonth()]}, ${fullDate.getHours()}:${fullDate.getMinutes()}0`}
+          {`${fullDate.getDate()} ${months[fullDate.getMonth()]} ${fullDate.getFullYear()} г. ${fullDate.getHours()}:${fullDate.getMinutes()}0`}
         </span>
         <Link className="card__button" to={`event/${id}`}>
           Забронировать
