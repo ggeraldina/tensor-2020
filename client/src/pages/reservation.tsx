@@ -1,11 +1,9 @@
 import React from 'react';
+import SearchForm from '../components/SearchForm/SearchForm';
  
 const Reservation = () => {
     return (
-       <div>
-          <h1>About US</h1>
-          <p>About US page body content</p>
-       </div>
+       <SearchForm />
     );
 }
  

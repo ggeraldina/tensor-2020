@@ -14,6 +14,20 @@ def parse_object_id(str_id):
 
 def parse_phone_number(str_phone_number):
     """ Преобразовать номер телефона в int """
+    if not isinstance(str_phone_number, str):
+        raise ErrorDataDB(
+            ("Переданный phone_number должен иметь строковый тип данных. Передан {}").format(
+                type(str_phone_number)
+            )
+        )
+    min_len = 4
+    if len(str_phone_number) < min_len:
+        raise ErrorDataDB(
+            ("Очень короткий номер телефона: {}. Хотя бы {} цифры").format(
+                str_phone_number,
+                min_len
+            )
+        )
     if not str_phone_number.isdigit():
         raise ErrorDataDB(
             ("Некорректный phone_number: {}. Должны быть только цифры").format(

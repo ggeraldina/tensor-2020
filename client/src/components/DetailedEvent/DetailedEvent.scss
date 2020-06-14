@@ -1,0 +1,21 @@
+.detailed-event {
+    padding: 10px;
+
+    &__preview {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    &__photo {
+        width: 40%;
+        padding: 20px 30px 20px 0;
+        object-fit: cover;
+    }
+
+    &__actors,
+    &__about {
+        text-indent: 1.5em;
+        text-align: justify;
+        padding: 10px 0;
+    }
+}
