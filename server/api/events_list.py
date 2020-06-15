@@ -44,6 +44,8 @@ def parse_positive_int(value):
     """ Преобразовать в положительное целое число """
     if value is None:
         raise ErrorDataDB(f"Отсутствует необходимый параметр.")
+    if not isinstance(value, str):
+        raise ErrorDataDB("Переданные параметры должны иметь строковый тип данных.")
     if not value.isdigit():
         raise ErrorDataDB(
             f"Получено некорректное значение '{value}'. Должно быть положительное целое число."

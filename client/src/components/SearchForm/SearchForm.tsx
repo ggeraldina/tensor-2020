@@ -61,6 +61,7 @@ const SearchForm: React.SFC = (): JSX.Element => {
                   placeholder="89099999999" 
                   label=""
                   inputHeight={40}
+                  type="number"
                   validationMessage={errorPhone && 'Поле должно содержать минимум 4 цифры'}
                   onChange={(e: { target: { value: string }}) => {
                     setPhone(e.target.value);

@@ -64,3 +64,11 @@
     right: 0;
     margin: auto;
   }
+
+  input.input-number {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+  }
