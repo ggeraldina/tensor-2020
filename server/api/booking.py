@@ -33,10 +33,7 @@ def add_booking(version):
 def check_request_dict(data):
     """ Проверить тип входных данных. Должен быть передан словарь """
     if not isinstance(data, dict):
-        raise ErrorDataDB(
-            "В запросе должен быть передан словарь. Передан {}".format(
-                type(data))
-        )
+        raise ErrorDataDB("В запросе должен быть передан словарь.")
 
 
 @run_transaction_with_retry
@@ -53,14 +50,12 @@ def check_password_to_cancel(str_password_to_cancel):
     """ Проверить пароль на надежность """
     if not isinstance(str_password_to_cancel, str):
         raise ErrorDataDB(
-            ("Переданный password_to_cancel должен иметь строковый тип данных. Передан {}").format(
-                type(str_password_to_cancel)
-            )
+            "Переданный password_to_cancel должен иметь строковый тип данных."
         )
     min_len = 8
     if len(str_password_to_cancel) < min_len:
         raise ErrorDataDB(
-            ("Очень короткий password_to_cancel: {}. Хотя бы {} символов").format(
+            ("Очень короткий password_to_cancel: {}. Хотя бы {} символов.").format(
                 str_password_to_cancel,
                 min_len
             )
