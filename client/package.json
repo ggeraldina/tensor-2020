@@ -19,7 +19,7 @@
     "concurrently": "^5.2.0",
     "evergreen-ui": "^4.27.4",
     "history": "^5.0.0",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-beforeunload": "^2.2.1",
     "react-dom": "^16.13.1",
